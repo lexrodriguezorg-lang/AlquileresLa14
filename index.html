@@ -2,265 +2,198 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Alquiler La 14</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#08080b; --ink2:#0e0e14; --ink3:#141420; --ink4:#1a1a28; --ink5:#222232;
-  --f:rgba(255,255,255,.06); --f2:rgba(255,255,255,.12); --f3:rgba(255,255,255,.2);
-  --txt:#ececf5; --txt2:#6e6e90; --txt3:#3a3a52;
-  --R:#e8192c; --R2:#ff3347; --R3:#ff6676;
-  --Rg:rgba(232,25,44,.14); --Rg2:rgba(232,25,44,.08); --Rg3:rgba(232,25,44,.04);
-  --Y:#ffd600; --Y2:#ffe84d; --Ydk:#a89000;
-  --Yg:rgba(255,214,0,.14); --Yg2:rgba(255,214,0,.07);
-  --G:#1ec98a; --Gg:rgba(30,201,138,.13);
-  --B:#4f9cf9; --Bg:rgba(79,156,249,.13);
-  --sw:262px; --th:60px; --nh:68px;
+:root {
+  --ink:#09090c; --ink2:#101014; --ink3:#16161c; --ink4:#1d1d26; --ink5:#24242f;
+  --fade:rgba(255,255,255,.06); --fade2:rgba(255,255,255,.11);
+  --txt:#eeeef5; --txt2:#7878a0; --txt3:#40405a;
+  --R:#e8192c; --R2:#ff3347; --Rg:rgba(232,25,44,.13); --Rg2:rgba(232,25,44,.07);
+  --Y:#ffd600; --Y2:#ffe84d; --Yg:rgba(255,214,0,.13); --Yg2:rgba(255,214,0,.07);
+  --G:#1ec98a; --Gg:rgba(30,201,138,.12);
+  --B:#4f9cf9; --Bg:rgba(79,156,249,.12);
+  --sw:260px; --th:62px; --nh:70px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
-body{font-family:'Barlow',sans-serif;background:var(--ink);color:var(--txt);font-size:14px;line-height:1.5;-webkit-tap-highlight-color:transparent;overflow-x:hidden;}
+body{font-family:"Barlow",sans-serif;background:var(--ink);color:var(--txt);font-size:14px;line-height:1.5;-webkit-tap-highlight-color:transparent;}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-thumb{background:var(--ink5);border-radius:2px;}
-button,input,select,textarea{font-family:'Barlow',sans-serif;cursor:pointer;}
+button,input,select{font-family:"Barlow",sans-serif;}
 
-/* ═══════════════════════════════════════
-   APP SHELL — two modes: panel / cliente
-═══════════════════════════════════════ */
-#panel-mode{display:flex;min-height:100vh;}
-#client-mode{display:none;min-height:100vh;background:#fff;}
+/* ── SHELL ── */
+.shell{display:flex;min-height:100vh;}
 
-/* ═══════════════════════════════════════
-   SIDEBAR
-═══════════════════════════════════════ */
+/* ── SIDEBAR ── */
 .sidebar{
-  width:var(--sw);background:var(--ink2);border-right:1px solid var(--f);
+  width:var(--sw);background:var(--ink2);border-right:1px solid var(--fade);
   position:fixed;top:0;left:0;bottom:0;z-index:200;
-  display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;
+  display:flex;flex-direction:column;overflow-y:auto;
 }
-.sb-logo{
-  padding:20px 18px 18px;border-bottom:1px solid var(--f);
-  margin-bottom:6px;flex-shrink:0;position:relative;overflow:hidden;
+.sb-top{
+  padding:22px 18px 18px;border-bottom:1px solid var(--fade);
+  margin-bottom:8px;flex-shrink:0;position:relative;overflow:hidden;
 }
-.sb-logo::after{
-  content:'14';position:absolute;right:-14px;top:-8px;
-  font-family:'Barlow Condensed',sans-serif;font-size:104px;font-weight:900;font-style:italic;
+.sb-top::after{
+  content:"14";position:absolute;right:-10px;top:-10px;
+  font-family:"Barlow Condensed",sans-serif;font-size:96px;font-weight:900;font-style:italic;
   color:var(--R);opacity:.055;line-height:1;pointer-events:none;user-select:none;
 }
-/* ONE LOGO TREATMENT — pill + name, nothing repeated */
-.logo-wrap{display:flex;align-items:center;gap:11px;}
+/* ONE LOGO — pill + name side by side, nothing below */
+.logo-row{display:flex;align-items:center;gap:11px;}
 .logo-pill{
-  background:var(--R);border-radius:11px;
-  width:48px;height:48px;
+  background:var(--R);border-radius:10px;padding:8px 12px;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 20px rgba(232,25,44,.38);flex-shrink:0;
+  box-shadow:0 4px 18px rgba(232,25,44,.35);flex-shrink:0;
 }
 .logo-pill span{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:26px;font-weight:900;font-style:italic;color:#fff;line-height:1;
+  font-family:"Barlow Condensed",sans-serif;
+  font-size:28px;font-weight:900;font-style:italic;color:#fff;line-height:1;
 }
-.logo-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;color:var(--txt);line-height:1.1;letter-spacing:.3px;}
-.logo-city{font-size:10px;color:var(--txt3);margin-top:4px;}
+.logo-text{}
+.logo-title{
+  font-family:"Barlow Condensed",sans-serif;
+  font-size:18px;font-weight:900;color:var(--txt);line-height:1;letter-spacing:.3px;
+}
+.logo-city{font-size:10px;color:var(--txt3);margin-top:3px;font-weight:500;}
 
-.ng{padding:2px 10px;}
+.ng{padding:0 10px 2px;}
 .ns{font-size:9px;font-weight:800;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;padding:10px 10px 4px;display:block;}
 .ni{
-  display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:8px;
+  display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;
   cursor:pointer;color:var(--txt2);font-size:13px;font-weight:600;
   transition:all .12s;margin-bottom:1px;border:1px solid transparent;user-select:none;
 }
 .ni:hover{background:var(--ink3);color:var(--txt);}
 .ni.on{background:var(--Rg);color:var(--R2);border-color:rgba(232,25,44,.18);}
 .ni-ic{font-size:15px;width:20px;text-align:center;flex-shrink:0;}
-.ni-hint{font-size:9px;color:var(--txt3);display:block;margin-top:1px;font-weight:500;}
-.ni-bdg{margin-left:auto;background:var(--R);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px;min-width:18px;text-align:center;flex-shrink:0;}
+.ni-hint{font-size:9px;color:var(--txt3);margin-top:1px;font-weight:500;display:block;}
+.ni-bdg{margin-left:auto;background:var(--R);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px;min-width:18px;text-align:center;}
 
-.sb-foot{margin-top:auto;padding:12px 10px;border-top:1px solid var(--f);flex-shrink:0;}
-.owner-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--ink3);border-radius:8px;border:1px solid var(--f);}
+.sb-foot{margin-top:auto;padding:12px 10px;border-top:1px solid var(--fade);flex-shrink:0;}
+.owner{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--ink3);border-radius:8px;border:1px solid var(--fade);cursor:pointer;}
 .ow-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--R),#ff6040);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;}
 .ow-nm{font-size:12px;font-weight:700;}
 .ow-pl{font-size:10px;color:var(--txt3);}
 
-/* ═══════════════════════════════════════
-   MAIN AREA
-═══════════════════════════════════════ */
+/* ── MAIN ── */
 .main{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;min-height:100vh;}
 .topbar{
-  height:var(--th);background:var(--ink2);border-bottom:1px solid var(--f);
-  padding:0 24px;display:flex;align-items:center;gap:12px;
+  height:var(--th);background:var(--ink2);border-bottom:1px solid var(--fade);
+  padding:0 26px;display:flex;align-items:center;gap:12px;
   position:sticky;top:0;z-index:50;flex-shrink:0;
 }
-.tb-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;flex:1;}
-.mob-logo{display:none;align-items:center;gap:9px;}
-.mob-pill{background:var(--R);border-radius:9px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;}
-.mob-pill span{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;font-style:italic;color:#fff;}
-.mob-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;}
+.topbar-title{font-family:"Barlow Condensed",sans-serif;font-size:21px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;flex:1;}
+/* mobile brand in topbar */
+.mob-logo{display:none;align-items:center;gap:8px;}
+.mob-pill{background:var(--R);border-radius:8px;padding:5px 10px;display:flex;align-items:center;gap:0;}
+.mob-pill span{font-family:"Barlow Condensed",sans-serif;font-size:19px;font-weight:900;font-style:italic;color:#fff;line-height:1;}
+.mob-name{font-family:"Barlow Condensed",sans-serif;font-size:18px;font-weight:900;color:var(--txt);}
 
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:1px solid var(--f2);background:transparent;color:var(--txt);font-size:12px;font-weight:700;cursor:pointer;transition:all .12s;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:1px solid var(--fade2);background:transparent;color:var(--txt);font-size:12px;font-weight:700;cursor:pointer;transition:all .12s;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;}
 .btn:hover{background:var(--ink4);}
 .btn:active{transform:scale(.97);}
-.btn-r{background:var(--R);border-color:var(--R);color:#fff;box-shadow:0 3px 16px rgba(232,25,44,.32);}
+.btn-r{background:var(--R);border-color:var(--R);color:#fff;box-shadow:0 3px 14px rgba(232,25,44,.3);}
 .btn-r:hover{background:var(--R2);}
-.btn-y{background:var(--Y);border-color:var(--Y);color:#140000;}
+.btn-y{background:var(--Y);border-color:var(--Y);color:#150000;}
 .btn-y:hover{background:var(--Y2);}
-.btn-g{background:var(--Gg);border-color:rgba(30,201,138,.3);color:var(--G);}
 .btn-sm{padding:5px 11px;font-size:11px;}
 .btn-dg{background:var(--Rg2);border-color:rgba(232,25,44,.28);color:var(--R2);}
 .btn-full{width:100%;justify-content:center;}
 
-.page{padding:24px;flex:1;}
+.content{padding:24px 26px;flex:1;}
 .view{display:none;}
 .view.on{display:block;animation:vIn .2s ease;}
 @keyframes vIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
 
-/* ═══════════════════════════════════════
-   DASHBOARD HERO — the candela part
-═══════════════════════════════════════ */
-.hero-band{
-  background:linear-gradient(135deg, #1a0006 0%, #200010 40%, #0d0800 100%);
-  border:1px solid rgba(232,25,44,.2);
-  border-radius:16px;
-  padding:28px 28px 24px;
-  margin-bottom:20px;
-  position:relative;overflow:hidden;
-}
-.hero-band::before{
-  content:'14';
-  position:absolute;right:-20px;top:-30px;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:200px;font-weight:900;font-style:italic;
-  color:var(--R);opacity:.07;line-height:1;
-  pointer-events:none;user-select:none;
-}
-.hero-band::after{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--R),var(--Y),var(--R));
-  background-size:200% 100%;
-  animation:shimmer 3s linear infinite;
-}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.hero-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;}
-.hero-date{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;}
-.hero-tag{background:var(--Rg);border:1px solid rgba(232,25,44,.3);color:var(--R3);font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;}
-.hero-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.hero-num{}
-.hero-num-lbl{font-size:10px;color:rgba(255,255,255,.35);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
-.hero-num-val{font-family:'Barlow Condensed',sans-serif;font-size:38px;font-weight:900;letter-spacing:-1.5px;line-height:1;}
-.hero-num-sub{font-size:11px;margin-top:4px;}
-.h-red{color:var(--R3);}
-.h-yel{color:var(--Y);}
-.h-grn{color:var(--G);}
-.h-up{color:var(--G);}
-.h-dim{color:rgba(255,255,255,.35);}
-
-/* ═══════════════════════════════════════
-   SECTION HEADER (inside each view)
-═══════════════════════════════════════ */
-.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.sec-t{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.3px;}
-.sec-s{font-size:12px;color:var(--txt3);font-weight:500;margin-top:2px;}
-
-/* ═══════════════════════════════════════
-   STAT CARDS (smaller, supporting)
-═══════════════════════════════════════ */
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
-.sc{background:var(--ink2);border:1px solid var(--f);border-radius:12px;padding:16px;position:relative;overflow:hidden;}
-.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+/* ── STAT CARDS ── */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:22px;}
+.sc{background:var(--ink2);border:1px solid var(--fade);border-radius:14px;padding:18px 20px;position:relative;overflow:hidden;transition:border-color .15s;}
+.sc:hover{border-color:var(--fade2);}
+.sc::before{content:"";position:absolute;top:0;left:0;right:0;height:2.5px;border-radius:14px 14px 0 0;}
 .sc.sr::before{background:linear-gradient(90deg,var(--R),var(--Y));}
 .sc.sy::before{background:var(--Y);}
 .sc.sg::before{background:var(--G);}
 .sc.sb::before{background:var(--B);}
-.sc-lbl{font-size:10px;color:var(--txt3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;}
-.sc-num{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;letter-spacing:-.5px;line-height:1;margin-bottom:3px;}
+.sc-ico{position:absolute;right:16px;top:14px;font-size:24px;opacity:.16;}
+.sc-lbl{font-size:10px;color:var(--txt3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.sc-num{font-family:"Barlow Condensed",sans-serif;font-size:32px;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:5px;}
 .sc-num.r{color:var(--R2);} .sc-num.y{color:var(--Y);} .sc-num.g{color:var(--G);} .sc-num.b{color:var(--B);}
 .sc-sub{font-size:11px;color:var(--txt3);}
 
-/* ═══════════════════════════════════════
-   GRIDS
-═══════════════════════════════════════ */
+/* ── LAYOUTS ── */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
 .g73{display:grid;grid-template-columns:7fr 3fr;gap:16px;margin-bottom:16px;}
 .g64{display:grid;grid-template-columns:6fr 4fr;gap:16px;margin-bottom:16px;}
 .gcol{display:flex;flex-direction:column;gap:16px;}
 
-/* ═══════════════════════════════════════
-   CARD
-═══════════════════════════════════════ */
-.card{background:var(--ink2);border:1px solid var(--f);border-radius:14px;padding:18px 20px;}
-.card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.card-t{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:var(--txt2);text-transform:uppercase;letter-spacing:.1em;}
+/* ── CARD ── */
+.card{background:var(--ink2);border:1px solid var(--fade);border-radius:14px;padding:20px;}
+.card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.card-t{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:800;color:var(--txt2);text-transform:uppercase;letter-spacing:.1em;}
 .card-a{font-size:11px;color:var(--R2);cursor:pointer;font-weight:700;}
 
-/* ═══════════════════════════════════════
-   TABLE
-═══════════════════════════════════════ */
+/* ── TABLE ── */
 .tw{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;}
-thead th{text-align:left;font-size:9px;font-weight:800;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;padding:0 12px 10px;border-bottom:1px solid var(--f);}
+thead th{text-align:left;font-size:9px;font-weight:800;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;padding:0 12px 10px;border-bottom:1px solid var(--fade);}
 tbody tr{transition:background .1s;cursor:pointer;}
 tbody tr:hover{background:var(--ink3);}
-tbody td{padding:11px 12px;font-size:13px;border-bottom:1px solid var(--f);}
+tbody td{padding:11px 12px;font-size:13px;border-bottom:1px solid var(--fade);}
 tbody tr:last-child td{border-bottom:none;}
-.money{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;color:var(--Y);}
+.money{font-family:"Barlow Condensed",sans-serif;font-size:16px;font-weight:900;color:var(--Y);}
 
-/* ═══════════════════════════════════════
-   BADGES
-═══════════════════════════════════════ */
+/* ── BADGES ── */
 .bdg{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;}
-.bdg::before{content:'';width:4px;height:4px;border-radius:50%;flex-shrink:0;}
+.bdg::before{content:"";width:4px;height:4px;border-radius:50%;flex-shrink:0;}
 .bk{background:var(--Gg);color:var(--G);} .bk::before{background:var(--G);}
 .bo{background:var(--Yg);color:var(--Y);} .bo::before{background:var(--Y);}
 .ba{background:var(--Rg);color:var(--R2);} .ba::before{background:var(--R2);}
 .bi{background:var(--Bg);color:var(--B);} .bi::before{background:var(--B);}
 
-/* ═══════════════════════════════════════
-   VEHICLE CARDS
-═══════════════════════════════════════ */
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;}
-.vcard{background:var(--ink2);border:1px solid var(--f);border-radius:14px;padding:18px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;}
-.vcard:hover{border-color:var(--f2);transform:translateY(-2px);}
-.vcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2.5px;}
+/* ── VEHICLE CARDS ── */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px;}
+.vcard{background:var(--ink2);border:1px solid var(--fade);border-radius:14px;padding:18px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;}
+.vcard:hover{border-color:var(--fade2);transform:translateY(-2px);}
+.vcard::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2.5px;}
 .vok::after{background:var(--G);}
-.vrented::after{background:var(--Y);} .vrented{border-color:rgba(255,214,0,.2);}
-.valert::after{background:var(--R2);} .valert{border-color:rgba(232,25,44,.22);}
+.vrented::after{background:var(--Y);} .vrented{border-color:rgba(255,214,0,.22);}
+.valert::after{background:var(--R2);} .valert{border-color:rgba(232,25,44,.25);}
 .vc-em{font-size:34px;margin-bottom:12px;display:block;}
-.vc-nm{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;margin-bottom:4px;}
-.vc-pl{font-family:'DM Mono',monospace;font-size:11px;color:var(--txt3);background:var(--ink3);padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:10px;letter-spacing:.12em;}
+.vc-nm{font-family:"Barlow Condensed",sans-serif;font-size:17px;font-weight:800;margin-bottom:4px;}
+.vc-pl{font-family:"DM Mono",monospace;font-size:11px;color:var(--txt3);background:var(--ink3);padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:10px;letter-spacing:.12em;}
 .vc-mt{font-size:11px;color:var(--txt3);margin-bottom:10px;}
-.vc-ft{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--f);}
-.vc-pr{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;color:var(--Y);}
-.vadd{border:1.5px dashed var(--f2) !important;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:185px;text-align:center;gap:10px;}
+.vc-ft{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--fade);margin-top:4px;}
+.vc-pr{font-family:"Barlow Condensed",sans-serif;font-size:16px;font-weight:900;color:var(--Y);}
+.vadd{border:1.5px dashed var(--fade2) !important;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:190px;text-align:center;gap:10px;}
 
-/* ═══════════════════════════════════════
-   LIST / CONTRACT ROWS
-═══════════════════════════════════════ */
-.lrow{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--f);cursor:pointer;transition:all .12s;}
+/* ── LIST ROWS ── */
+.lrow{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--fade);cursor:pointer;transition:all .12s;}
 .lrow:last-child{border-bottom:none;}
 .lrow:hover{margin:0 -8px;padding:10px 8px;border-radius:8px;background:var(--ink3);border-color:transparent;}
 .lav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;}
 .ln{font-size:13px;font-weight:700;}
 .ld{font-size:11px;color:var(--txt3);}
 .lv{font-size:13px;font-weight:800;color:var(--Y);margin-left:auto;}
-.ccon{background:var(--ink3);border:1px solid var(--f);border-radius:8px;padding:13px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .12s;}
-.ccon:hover{border-color:var(--f2);}
-.ccon:last-child{margin-bottom:0;}
-.cnum{font-family:'DM Mono',monospace;font-size:10px;color:var(--txt3);width:65px;flex-shrink:0;}
 
-/* ═══════════════════════════════════════
-   NOTIFS / ALERTS
-═══════════════════════════════════════ */
-.notif{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--f);}
+.ccon{background:var(--ink3);border:1px solid var(--fade);border-radius:8px;padding:13px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .12s;}
+.ccon:hover{border-color:var(--fade2);}
+.ccon:last-child{margin-bottom:0;}
+.cnum{font-family:"DM Mono",monospace;font-size:10px;color:var(--txt3);width:65px;flex-shrink:0;}
+
+/* ── NOTIFS ── */
+.notif{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--fade);}
 .notif:last-child{border-bottom:none;}
 .ndot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px;}
 .ntx{flex:1;font-size:12px;color:var(--txt2);line-height:1.5;}
 .ntx strong{color:var(--txt);font-weight:700;}
 .ntm{font-size:10px;color:var(--txt3);white-space:nowrap;}
+
 .alr{display:flex;align-items:center;gap:12px;padding:12px 13px;border-radius:8px;margin-bottom:8px;border:1px solid;}
-.alr.danger{background:var(--Rg3);border-color:rgba(232,25,44,.2);}
+.alr.danger{background:var(--Rg2);border-color:rgba(232,25,44,.2);}
 .alr.warn{background:var(--Yg2);border-color:rgba(255,214,0,.2);}
 .alr.good{background:var(--Gg);border-color:rgba(30,201,138,.2);}
 .alr-ic{font-size:17px;flex-shrink:0;}
@@ -269,237 +202,174 @@ tbody tr:last-child td{border-bottom:none;}
 .alr-s{font-size:11px;color:var(--txt3);margin-top:2px;}
 .alr-d{font-size:11px;font-weight:800;flex-shrink:0;}
 
-/* ═══════════════════════════════════════
-   PROGRESS BARS
-═══════════════════════════════════════ */
+/* ── PROGRESS / BARS ── */
 .pw{margin-bottom:12px;}
 .ph{display:flex;justify-content:space-between;margin-bottom:5px;}
 .pl{font-size:12px;color:var(--txt2);font-weight:600;}
 .pv{font-size:12px;font-weight:800;}
-.pb{height:5px;background:var(--ink4);border-radius:4px;overflow:hidden;}
+.pb{height:5px;background:var(--ink3);border-radius:4px;overflow:hidden;}
 .pf{height:100%;border-radius:4px;}
 .irow{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
 .il{font-size:11px;color:var(--txt2);font-weight:600;width:80px;flex-shrink:0;}
-.it{flex:1;height:7px;background:var(--ink4);border-radius:4px;overflow:hidden;}
-.ifi{height:100%;border-radius:4px;}
+.it{flex:1;height:7px;background:var(--ink3);border-radius:4px;overflow:hidden;}
+.if{height:100%;border-radius:4px;}
 .ia{font-size:12px;font-weight:800;width:70px;text-align:right;}
-
-/* ═══════════════════════════════════════
-   BAR CHART
-═══════════════════════════════════════ */
-.bchart{display:flex;align-items:flex-end;gap:7px;height:80px;padding-top:4px;}
+.bchart{display:flex;align-items:flex-end;gap:7px;height:100px;padding-top:8px;}
 .bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;}
-.bfil{width:100%;border-radius:3px 3px 0 0;min-height:3px;transition:filter .15s;}
-.bfil:hover{filter:brightness(1.25);}
+.bfil{width:100%;border-radius:4px 4px 0 0;min-height:4px;cursor:pointer;}
+.bfil:hover{filter:brightness(1.2);}
 .blab{font-size:9px;color:var(--txt3);font-weight:700;}
 .bval{font-size:8px;font-weight:800;}
 
-/* ═══════════════════════════════════════
-   FORMS
-═══════════════════════════════════════ */
-.fg{margin-bottom:13px;}
+/* ── FORMS ── */
+.fg{margin-bottom:14px;}
 .fl{font-size:10px;font-weight:800;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;display:block;}
-.fi{width:100%;background:var(--ink3);border:1px solid var(--f2);border-radius:8px;color:var(--txt);font-size:14px;font-weight:500;padding:10px 12px;outline:none;transition:border-color .15s;-webkit-appearance:none;}
+.fi{width:100%;background:var(--ink3);border:1px solid var(--fade2);border-radius:8px;color:var(--txt);font-family:"Barlow",sans-serif;font-size:14px;font-weight:500;padding:10px 12px;outline:none;transition:border-color .15s;-webkit-appearance:none;}
 .fi:focus{border-color:var(--R);}
 .fi::placeholder{color:var(--txt3);}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
-/* ═══════════════════════════════════════
-   BOTTOM SHEET MODAL
-═══════════════════════════════════════ */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px);z-index:300;display:none;align-items:flex-end;justify-content:center;padding:0;}
+/* ── MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(5px);z-index:300;display:none;align-items:flex-end;justify-content:center;padding:0;}
 .overlay.open{display:flex;}
-.sheet{background:var(--ink2);border:1px solid var(--f2);width:100%;max-width:540px;max-height:93dvh;overflow-y:auto;animation:shUp .24s cubic-bezier(.32,.72,0,1);border-radius:20px 20px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));}
+.sheet{background:var(--ink2);border:1px solid var(--fade2);width:100%;max-width:540px;max-height:93dvh;overflow-y:auto;animation:shUp .24s cubic-bezier(.32,.72,0,1);border-radius:20px 20px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));}
 @keyframes shUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
-.sh-hnd{width:36px;height:4px;background:var(--f2);border-radius:2px;margin:12px auto 0;}
-.sh-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 22px 14px;border-bottom:1px solid var(--f);position:relative;overflow:hidden;}
-.sh-hd::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--R),var(--Y));}
-.sh-t{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.3px;}
+.sh-handle{width:36px;height:4px;background:var(--fade2);border-radius:2px;margin:12px auto 0;}
+.sh-head{display:flex;align-items:center;justify-content:space-between;padding:16px 22px 14px;border-bottom:1px solid var(--fade);position:relative;overflow:hidden;}
+.sh-head::before{content:"";position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--R),var(--Y));}
+.sh-t{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.3px;}
 .sh-x{font-size:18px;cursor:pointer;color:var(--txt3);width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:6px;}
 .sh-x:hover{background:var(--ink3);color:var(--txt);}
-.sh-bd{padding:18px 22px;}
-.sh-ft{padding:14px 22px 0;border-top:1px solid var(--f);display:flex;gap:8px;justify-content:flex-end;}
+.sh-body{padding:18px 22px;}
+.sh-foot{padding:14px 22px 0;border-top:1px solid var(--fade);display:flex;gap:8px;justify-content:flex-end;}
 
-/* ═══════════════════════════════════════
-   TOAST
-═══════════════════════════════════════ */
+/* ── WA ── */
+.wa{background:var(--ink3);border:1px solid var(--fade);border-radius:8px;border-left:3px solid;padding:13px 15px;margin-bottom:10px;}
+
+/* ── LANDING ── */
+.land{background:#fff;color:#111;font-family:"Barlow",sans-serif;border-radius:14px;overflow:hidden;border:1px solid var(--fade);max-width:380px;margin:0 auto;}
+.lhero{background:linear-gradient(155deg,#0d0000 0%,#1a0007 45%,#0d0b00 100%);padding:50px 24px 40px;text-align:center;position:relative;overflow:hidden;}
+.lhero::before{content:"14";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:"Barlow Condensed",sans-serif;font-size:250px;font-weight:900;font-style:italic;color:var(--R);opacity:.05;pointer-events:none;line-height:1;}
+.lbdg{display:inline-block;background:rgba(255,214,0,.12);border:1px solid rgba(255,214,0,.3);color:var(--Y);font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+.ltit{font-family:"Barlow Condensed",sans-serif;font-size:44px;font-weight:900;font-style:italic;color:#fff;line-height:.95;letter-spacing:-1px;margin-bottom:8px;position:relative;}
+.ltit span{color:var(--R2);}
+.lsub{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:24px;}
+.lcta{background:var(--R);color:#fff;border:none;padding:14px 28px;border-radius:10px;font-family:"Barlow",sans-serif;font-size:14px;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:.05em;box-shadow:0 6px 22px rgba(232,25,44,.4);transition:all .2s;}
+.lcta:hover{transform:translateY(-2px);}
+.lsect{padding:26px 18px;}
+.lstit{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:900;margin-bottom:14px;text-transform:uppercase;}
+.lpub{background:#fff;border:1.5px solid #e8e8ec;border-radius:12px;overflow:hidden;margin-bottom:10px;cursor:pointer;transition:all .15s;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.lpub:hover{border-color:var(--R);transform:translateY(-1px);}
+.limg{background:linear-gradient(135deg,#fff0f0,#fff5e0);height:100px;display:flex;align-items:center;justify-content:center;font-size:48px;}
+.lbdy{padding:12px 14px;}
+.lnm{font-family:"Barlow Condensed",sans-serif;font-size:16px;font-weight:900;}
+.lsp{font-size:11px;color:#888;margin:2px 0 8px;}
+.lpr{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:900;color:var(--R);}
+.lpr span{font-size:11px;color:#888;font-family:"Barlow",sans-serif;font-weight:400;}
+.lvbtn{width:100%;background:var(--R);border:none;border-radius:8px;padding:9px;font-family:"Barlow",sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer;margin-top:8px;text-transform:uppercase;letter-spacing:.04em;}
+.lstep{display:flex;gap:12px;padding:13px;background:#fff;border-radius:10px;margin-bottom:8px;border:1px solid #e8e8ec;}
+.lstepn{width:28px;height:28px;border-radius:50%;background:var(--R);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;}
+.lstept{font-size:14px;font-weight:800;margin-bottom:1px;}
+.lsteps{font-size:11px;color:#888;}
+
+/* ── TOAST ── */
 .toast{position:fixed;bottom:22px;right:22px;background:var(--ink2);border:1px solid var(--R);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;z-index:999;max-width:300px;transform:translateY(80px);opacity:0;transition:all .3s ease;box-shadow:0 8px 32px rgba(232,25,44,.22);}
 .toast.show{transform:translateY(0);opacity:1;}
 
-/* ═══════════════════════════════════════
-   BOTTOM NAV — mobile
-═══════════════════════════════════════ */
-.bot-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--ink2);border-top:1px solid var(--f);z-index:150;padding-bottom:env(safe-area-inset-bottom,0px);}
+/* ── BOTTOM NAV (mobile) ── */
+.bot-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--ink2);border-top:1px solid var(--fade);z-index:150;padding-bottom:env(safe-area-inset-bottom,0px);}
 .bn{display:flex;}
-.bt{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;cursor:pointer;color:var(--txt3);font-size:10px;font-weight:700;transition:color .15s;position:relative;user-select:none;}
+.bt{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 9px;cursor:pointer;color:var(--txt3);font-size:10px;font-weight:700;transition:color .15s;position:relative;user-select:none;}
 .bt:active{opacity:.7;}
 .bt.on{color:var(--R2);}
 .bt-ic{font-size:22px;line-height:1;}
-.bt-dot{position:absolute;top:8px;right:22%;width:8px;height:8px;background:var(--R);border-radius:50%;border:1.5px solid var(--ink2);}
+.bt-dot{position:absolute;top:8px;right:20%;width:8px;height:8px;background:var(--R);border-radius:50%;border:1.5px solid var(--ink2);}
 
-/* ═══════════════════════════════════════
-   WA MESSAGES
-═══════════════════════════════════════ */
-.wa{background:var(--ink3);border:1px solid var(--f);border-radius:8px;border-left:3px solid;padding:13px 15px;margin-bottom:10px;}
-
-/* ═══════════════════════════════════════
-   ★ CLIENT PAGE — standalone experience ★
-═══════════════════════════════════════ */
-#client-mode{font-family:'Barlow',sans-serif;}
-
-/* Client topbar */
-.cl-bar{
-  background:var(--R);padding:14px 20px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:50;
-}
-.cl-bar-logo{display:flex;align-items:center;gap:8px;}
-.cl-bar-num{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;font-style:italic;color:#fff;}
-.cl-bar-name{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;color:#fff;}
-.cl-bar-wa{
-  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
-  color:#fff;border-radius:20px;padding:6px 14px;
-  font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;
-  display:inline-flex;align-items:center;gap:5px;
-}
-
-/* Client hero */
-.cl-hero{
-  background:linear-gradient(160deg,#0d0000 0%,#180008 50%,#0d0b00 100%);
-  padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden;
-}
-.cl-hero::before{
-  content:'14';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  font-family:'Barlow Condensed',sans-serif;font-size:280px;font-weight:900;font-style:italic;
-  color:var(--R);opacity:.055;pointer-events:none;line-height:1;
-}
-.cl-hero-tag{display:inline-block;background:rgba(255,214,0,.14);border:1px solid rgba(255,214,0,.32);color:var(--Y);font-size:10px;font-weight:800;padding:4px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px;}
-.cl-hero-tit{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;font-style:italic;color:#fff;line-height:.92;letter-spacing:-1.5px;margin-bottom:10px;position:relative;}
-.cl-hero-tit span{color:var(--R2);}
-.cl-hero-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:28px;font-weight:500;}
-.cl-cta{
-  background:var(--R);color:#fff;border:none;
-  padding:16px 32px;border-radius:12px;
-  font-size:16px;font-weight:800;cursor:pointer;
-  text-transform:uppercase;letter-spacing:.05em;
-  box-shadow:0 6px 28px rgba(232,25,44,.45);transition:all .2s;
-  display:inline-flex;align-items:center;gap:8px;
-}
-.cl-cta:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(232,25,44,.55);}
-.cl-cta2{
-  background:transparent;color:rgba(255,255,255,.6);
-  border:1px solid rgba(255,255,255,.2);
-  padding:13px 24px;border-radius:12px;
-  font-size:13px;font-weight:700;cursor:pointer;
-  text-transform:uppercase;letter-spacing:.05em;margin-left:10px;transition:all .2s;
-}
-.cl-cta2:hover{border-color:rgba(255,255,255,.4);color:#fff;}
-
-/* Stats bar */
-.cl-stats{
-  background:var(--ink2);display:grid;grid-template-columns:repeat(3,1fr);
-  border-bottom:1px solid var(--f);
-}
-.cl-stat{padding:16px 12px;text-align:center;border-right:1px solid var(--f);}
-.cl-stat:last-child{border-right:none;}
-.cl-stat-n{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:var(--Y);line-height:1;}
-.cl-stat-l{font-size:10px;color:var(--txt2);margin-top:3px;font-weight:600;}
-
-/* Vehicles section */
-.cl-sec{padding:28px 20px;}
-.cl-sec-tit{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:#111;margin-bottom:16px;letter-spacing:-.3px;}
-.cl-veh{background:#fff;border:2px solid #eee;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:all .15s;}
-.cl-veh:hover{border-color:var(--R);box-shadow:0 6px 24px rgba(232,25,44,.15);transform:translateY(-2px);}
-.cl-veh-img{height:130px;display:flex;align-items:center;justify-content:center;font-size:64px;position:relative;}
-.cl-veh-img.moto{background:linear-gradient(135deg,#fff0ee,#fff5e6);}
-.cl-veh-img.carro{background:linear-gradient(135deg,#eef0ff,#e6f4ff);}
-.cl-veh-body{padding:14px 16px 16px;}
-.cl-veh-nm{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:#111;margin-bottom:3px;}
-.cl-veh-spec{font-size:12px;color:#888;margin-bottom:12px;}
-.cl-veh-price-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.cl-veh-price{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:var(--R);}
-.cl-veh-price span{font-size:12px;color:#888;font-family:'Barlow',sans-serif;font-weight:400;}
-.cl-veh-btn{
-  width:100%;background:var(--R);border:none;border-radius:10px;
-  padding:13px;font-size:14px;font-weight:800;color:#fff;cursor:pointer;
-  text-transform:uppercase;letter-spacing:.05em;
-  box-shadow:0 3px 14px rgba(232,25,44,.3);transition:all .15s;
-}
-.cl-veh-btn:hover{background:var(--R2);}
-.cl-veh-btn:active{transform:scale(.98);}
-.cl-avail{display:inline-flex;align-items:center;gap:4px;background:#eafaf3;color:#0a7a4a;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;}
-.cl-avail::before{content:'';width:6px;height:6px;border-radius:50%;background:#0a7a4a;}
-.cl-busy{display:inline-flex;align-items:center;gap:4px;background:#fff8e0;color:#8a6000;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;}
-.cl-busy::before{content:'';width:6px;height:6px;border-radius:50%;background:#e09000;}
-
-/* How it works */
-.cl-how{background:#f8f9ff;padding:28px 20px;}
-.cl-step{display:flex;gap:14px;padding:14px 16px;background:#fff;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 6px rgba(0,0,0,.05);}
-.cl-step-n{width:34px;height:34px;border-radius:50%;background:var(--R);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex-shrink:0;font-family:'Barlow Condensed',sans-serif;}
-.cl-step-t{font-size:15px;font-weight:800;color:#111;margin-bottom:2px;}
-.cl-step-s{font-size:12px;color:#888;}
-
-/* Trust section */
-.cl-trust{padding:24px 20px;background:#fff;}
-.cl-trust-tit{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#111;margin-bottom:14px;text-transform:uppercase;}
-.cl-trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.cl-chip{background:#f5f5f8;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#333;}
-.cl-chip-ic{font-size:20px;}
-
-/* Footer */
-.cl-foot{background:var(--ink2);padding:28px 20px;text-align:center;}
-.cl-foot-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;}
-.cl-foot-pill{background:var(--R);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;}
-.cl-foot-pill span{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;font-style:italic;color:#fff;}
-.cl-foot-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;color:var(--txt);}
-.cl-foot-city{font-size:11px;color:var(--txt3);margin-bottom:20px;}
-.cl-foot-wa{
-  display:inline-flex;align-items:center;gap:8px;
-  background:#25d366;color:#fff;border:none;border-radius:12px;
-  padding:13px 24px;font-size:14px;font-weight:800;cursor:pointer;
-  text-transform:uppercase;letter-spacing:.04em;
-  box-shadow:0 4px 16px rgba(37,211,102,.35);
-}
-
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
-@media(max-width:1080px){:root{--sw:205px;}.stat-row{grid-template-columns:1fr 1fr;}}
+/* ── RESPONSIVE ── */
+@media(max-width:1080px){:root{--sw:200px;}.stat-row{grid-template-columns:1fr 1fr;}}
 @media(max-width:720px){
   .sidebar{display:none;}
   .main{margin-left:0;}
-  .page{padding:14px 14px calc(var(--nh)+14px);}
+  .content{padding:14px 14px calc(var(--nh) + 14px);}
   .topbar{padding:0 14px;}
-  .tb-title{display:none;}
+  .topbar-title{display:none;}
   .mob-logo{display:flex !important;}
   .hide-m{display:none !important;}
   .bot-nav{display:block;}
-  .toast{right:12px;left:12px;bottom:calc(var(--nh)+10px);max-width:none;}
+  .toast{right:12px;left:12px;bottom:calc(var(--nh) + 10px);max-width:none;}
   .stat-row{grid-template-columns:1fr 1fr;}
   .g73,.g64,.g2{grid-template-columns:1fr;}
   .vgrid{grid-template-columns:1fr 1fr;}
   .frow{grid-template-columns:1fr;}
   .sheet{max-width:100%;}
-  .hero-nums{grid-template-columns:1fr 1fr;}
-  .hero-num:last-child{display:none;}
 }
-@media(max-width:420px){.vgrid{grid-template-columns:1fr;}.hero-nums{grid-template-columns:1fr 1fr;}}
+@media(max-width:400px){.vgrid{grid-template-columns:1fr;}}
+
+/* ═══ SOL MODE ═══ */
+body.sol {
+  --ink:#ffffff !important; --ink2:#f2f2f5 !important; --ink3:#e5e5ea !important;
+  --ink4:#d8d8e0 !important; --ink5:#ccccda !important;
+  --f:rgba(0,0,0,.09) !important; --f2:rgba(0,0,0,.16) !important;
+  --txt:#000000 !important; --txt2:#2a2a40 !important; --txt3:#555570 !important;
+  --R:#cc0018 !important; --R2:#e8001a !important;
+  --Rg:rgba(200,0,20,.12) !important; --Rg2:rgba(200,0,20,.07) !important;
+  --Y:#a07800 !important; --Yg:rgba(160,120,0,.12) !important;
+  --G:#077a4a !important; --Gg:rgba(7,122,74,.12) !important;
+  --B:#0a4fad !important; --Bg:rgba(10,79,173,.12) !important;
+}
+body.sol .hero-band {
+  background: #cc0018 !important;
+  border-color: rgba(0,0,0,.15) !important;
+}
+body.sol .hero-band::before { opacity: .04 !important; }
+body.sol .hero-num-val { color: #fff !important; }
+body.sol .hero-num-lbl, body.sol .hero-num-sub, body.sol .hero-date { color: rgba(255,255,255,.75) !important; }
+body.sol .hero-tag { background:rgba(255,255,255,.2) !important; border-color:rgba(255,255,255,.4) !important; color:#fff !important; }
+body.sol .money { color: #a07800 !important; }
+
+/* Sol toggle button */
+.sol-btn {
+  display:flex; align-items:center; gap:6px;
+  padding:7px 13px; border-radius:8px;
+  border:1px solid var(--f2); background:transparent;
+  color:var(--txt2); font-size:12px; font-weight:700; cursor:pointer;
+  transition:all .15s; white-space:nowrap;
+}
+.sol-btn:hover { background:var(--ink4); }
+body.sol .sol-btn {
+  background: #cc0018 !important;
+  border-color: #cc0018 !important;
+  color: white !important;
+}
+
+
+.score-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.sc-a{background:#e0f5ec;color:#077a4a;}
+.sc-b{background:#fff8e0;color:#8a6000;}
+.sc-c{background:#ffeeee;color:#cc0018;}
+
+
+.roi-card{background:var(--ink3);border:1px solid var(--f);border-radius:10px;padding:14px;margin-bottom:10px;}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
+.roi-item{text-align:center;}
+.roi-val{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;line-height:1;}
+.roi-lbl{font-size:9px;color:var(--txt3);margin-top:2px;font-weight:600;}
+.roi-bar-wrap{margin-top:10px;}
+.roi-bar{height:6px;background:var(--ink4);border-radius:4px;overflow:hidden;margin-top:4px;}
+.roi-fill{height:100%;border-radius:4px;}
+
 </style>
 </head>
 <body>
-
-<!-- ════════════════════════════════════════
-     PANEL MODE — OWNER VIEW
-════════════════════════════════════════ -->
-<div id="panel-mode">
+<div class="shell">
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sb-logo">
-    <div class="logo-wrap">
+  <div class="sb-top">
+    <div class="logo-row">
       <div class="logo-pill"><span>14</span></div>
-      <div>
-        <div class="logo-name">ALQUILER LA 14</div>
+      <div class="logo-text">
+        <div class="logo-title">ALQUILER LA 14</div>
         <div class="logo-city">La Dorada, Caldas · Colombia</div>
       </div>
     </div>
@@ -509,8 +379,8 @@ tbody tr:last-child td{border-bottom:none;}
     <span class="ns">Principal</span>
     <div class="ni on" data-v="dashboard"><span class="ni-ic">📊</span><div><div>Dashboard</div><span class="ni-hint">Resumen del negocio hoy</span></div></div>
     <div class="ni" data-v="flota"><span class="ni-ic">🏍</span><div><div>Mi Flota</div><span class="ni-hint">Motos y carros disponibles</span></div></div>
-    <div class="ni" data-v="reservas"><span class="ni-ic">📅</span><div><div>Reservas</div><span class="ni-hint">Solicitudes por aprobar</span></div><span class="ni-bdg">3</span></div>
-    <div class="ni" data-v="contratos"><span class="ni-ic">📄</span><div><div>Contratos</div><span class="ni-hint">Contratos digitales</span></div></div>
+    <div class="ni" data-v="reservas"><span class="ni-ic">📅</span><div><div>Reservas</div><span class="ni-hint">Solicitudes pendientes</span></div><span class="ni-bdg">3</span></div>
+    <div class="ni" data-v="contratos"><span class="ni-ic">📄</span><div><div>Contratos</div><span class="ni-hint">Documentos digitales</span></div></div>
   </div>
   <div class="ng">
     <span class="ns">Negocio</span>
@@ -519,13 +389,13 @@ tbody tr:last-child td{border-bottom:none;}
     <div class="ni" data-v="alertas"><span class="ni-ic">🔔</span><div><div>Alertas</div><span class="ni-hint">SOAT, RTM, vencimientos</span></div><span class="ni-bdg">2</span></div>
   </div>
   <div class="ng">
-    <span class="ns">Tu negocio online</span>
-    <div class="ni ni-cl" data-v="cliente"><span class="ni-ic">🌐</span><div><div>Ver como cliente</div><span class="ni-hint">Lo que ven tus clientes</span></div></div>
+    <span class="ns">Herramientas</span>
+    <div class="ni" data-v="landing"><span class="ni-ic">🌐</span><div><div>Mi Página Web</div><span class="ni-hint">Lo que ven tus clientes</span></div></div>
     <div class="ni" data-v="whatsapp"><span class="ni-ic">💬</span><div><div>WhatsApp Bot</div><span class="ni-hint">Mensajes automáticos</span></div></div>
   </div>
 
   <div class="sb-foot">
-    <div class="owner-row">
+    <div class="owner">
       <div class="ow-av">P</div>
       <div><div class="ow-nm">Propietario</div><div class="ow-pl">Plan Pro · Activo</div></div>
     </div>
@@ -539,352 +409,291 @@ tbody tr:last-child td{border-bottom:none;}
       <div class="mob-pill"><span>14</span></div>
       <div class="mob-name">ALQUILER LA 14</div>
     </div>
-    <div class="tb-title" id="ptitle">Dashboard</div>
-    <!-- NO duplicate button here — each section has its own CTA -->
-    <button class="btn btn-g hide-m" onclick="switchToClient()">🌐 Ver como cliente</button>
+    <div class="topbar-title" id="ptitle">Dashboard</div>
+    <!-- NO "Nuevo Contrato" here — each section tiene su propio CTA -->
   </div>
 
-  <div class="page">
+  <div class="content">
 
-    <!-- ═══ DASHBOARD ═══ -->
-    <div id="v-dashboard" class="view on">
-      <!-- HERO BAND -->
-      <div class="hero-band">
-        <div class="hero-top">
-          <div class="hero-date">Miércoles, 15 de abril de 2026</div>
-          <div class="hero-tag">● Negocio activo</div>
-        </div>
-        <div class="hero-nums">
-          <div class="hero-num">
-            <div class="hero-num-lbl">Ingresos hoy</div>
-            <div class="hero-num-val h-red">$420.000</div>
-            <div class="hero-num-sub h-up">↑ 15% vs ayer</div>
-          </div>
-          <div class="hero-num">
-            <div class="hero-num-lbl">En arriendo ahora</div>
-            <div class="hero-num-val h-yel">6 <span style="font-size:20px;opacity:.5">/ 11</span></div>
-            <div class="hero-num-sub h-dim">5 vehículos libres</div>
-          </div>
-          <div class="hero-num">
-            <div class="hero-num-lbl">Semana corriente</div>
-            <div class="hero-num-val h-grn">$3.36M</div>
-            <div class="hero-num-sub h-up">↑ 22% vs semana anterior</div>
-          </div>
-        </div>
+  <!-- DASHBOARD -->
+  <div id="v-dashboard" class="view on">
+    <div class="stat-row">
+      <div class="sc sr"><div class="sc-ico">💰</div><div class="sc-lbl">Ingresos hoy</div><div class="sc-num r">$420k</div><div class="sc-sub">↑ 15% vs ayer</div></div>
+      <div class="sc sy"><div class="sc-ico">🏍</div><div class="sc-lbl">En arriendo</div><div class="sc-num y">6 / 11</div><div class="sc-sub">5 disponibles ahora</div></div>
+      <div class="sc sg"><div class="sc-ico">👥</div><div class="sc-lbl">Clientes activos</div><div class="sc-num g">28</div><div class="sc-sub">+3 esta semana</div></div>
+      <div class="sc sb"><div class="sc-ico">⚠️</div><div class="sc-lbl">Alertas urgentes</div><div class="sc-num b">2</div><div class="sc-sub">SOAT + RTM vencen pronto</div></div>
+    </div>
+    <div class="g73">
+      <div class="card">
+        <div class="card-h"><div class="card-t">Actividad reciente</div><div class="card-a" onclick="nav('contratos')">Ver todos →</div></div>
+        <div class="tw"><table>
+          <thead><tr><th>Cliente</th><th>Vehículo</th><th>Días</th><th>Valor</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr onclick="openS('s-cdet')">
+              <td><b>Juan Mora</b><br><span style="font-size:10px;color:var(--txt3)">315 824 1190</span></td>
+              <td>Honda CB 190<br><span style="font-family:DM Mono,monospace;font-size:10px;color:var(--txt3)">LKM-42C</span></td>
+              <td>3 días</td><td><span class="money">$270k</span></td><td><span class="bdg bo">En curso</span></td>
+            </tr>
+            <tr><td><b>Lina Pérez</b><br><span style="font-size:10px;color:var(--txt3)">314 556 7892</span></td><td>Sandero · <span style="font-family:DM Mono,monospace;font-size:10px;color:var(--txt3)">WXY-09D</span></td><td>1 día</td><td><span class="money">$120k</span></td><td><span class="bdg bo">En curso</span></td></tr>
+            <tr><td><b>Carlos Ruiz</b></td><td>Yamaha FZ 150</td><td>2 días</td><td><span class="money">$150k</span></td><td><span class="bdg bk">Devuelto</span></td></tr>
+            <tr><td><b>Andrea Muñoz</b></td><td>Spark GT</td><td>5 días</td><td><span class="money">$600k</span></td><td><span class="bdg bk">Devuelto</span></td></tr>
+            <tr><td><b>Pedro Soto</b></td><td>AKT 125</td><td>1 día</td><td><span class="money" style="color:var(--R2)">$60k</span></td><td><span class="bdg ba">Pago pendiente</span></td></tr>
+          </tbody>
+        </table></div>
       </div>
-
-      <div class="g73">
+      <div class="gcol">
         <div class="card">
-          <div class="card-h"><div class="card-t">Actividad reciente</div><div class="card-a" onclick="nav('contratos')">Ver todos →</div></div>
-          <div class="tw"><table>
-            <thead><tr><th>Cliente</th><th>Vehículo</th><th>Días</th><th>Valor</th><th>Estado</th></tr></thead>
-            <tbody>
-              <tr onclick="openS('s-cdet')"><td><b>Juan Mora</b><br><span style="font-size:10px;color:var(--txt3)">315 824 1190</span></td><td>Honda CB 190<br><span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--txt3)">LKM-42C</span></td><td>3 días</td><td><span class="money">$270k</span></td><td><span class="bdg bo">En curso</span></td></tr>
-              <tr><td><b>Lina Pérez</b><br><span style="font-size:10px;color:var(--txt3)">314 556 7892</span></td><td>Sandero · <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--txt3)">WXY-09D</span></td><td>1 día</td><td><span class="money">$120k</span></td><td><span class="bdg bo">En curso</span></td></tr>
-              <tr><td><b>Carlos Ruiz</b></td><td>Yamaha FZ 150</td><td>2 días</td><td><span class="money">$150k</span></td><td><span class="bdg bk">Devuelto</span></td></tr>
-              <tr><td><b>Andrea Muñoz</b></td><td>Spark GT</td><td>5 días</td><td><span class="money">$600k</span></td><td><span class="bdg bk">Devuelto</span></td></tr>
-              <tr><td><b>Pedro Soto</b></td><td>AKT 125</td><td>1 día</td><td><span class="money" style="color:var(--R2)">$60k</span></td><td><span class="bdg ba">Pago pendiente</span></td></tr>
-            </tbody>
-          </table></div>
-        </div>
-        <div class="gcol">
-          <div class="card">
-            <div class="card-h"><div class="card-t">Solicitudes</div><span class="bdg ba">3 nuevas</span></div>
-            <div class="lrow" onclick="openS('s-solic')">
-              <div class="lav" style="background:var(--Bg);color:var(--B)">JM</div>
-              <div style="flex:1"><div class="ln">Juan Mora</div><div class="ld">CB 190 · 16-18 abr</div></div>
-              <button class="btn btn-sm btn-r" onclick="event.stopPropagation();toast('✅ Aprobado')">OK</button>
-            </div>
-            <div class="lrow">
-              <div class="lav" style="background:var(--Yg);color:var(--Y)">LP</div>
-              <div style="flex:1"><div class="ln">Lina Pérez</div><div class="ld">Sandero · hoy 4pm</div></div>
-              <button class="btn btn-sm btn-r" onclick="event.stopPropagation();toast('✅ Aprobado')">OK</button>
-            </div>
-            <div class="lrow">
-              <div class="lav" style="background:var(--Rg);color:var(--R2)">CR</div>
-              <div style="flex:1"><div class="ln">Carlos Ruiz</div><div class="ld">Cualquier moto · fin de semana</div></div>
-              <button class="btn btn-sm" onclick="event.stopPropagation();openS('s-solic')">Ver</button>
-            </div>
+          <div class="card-h"><div class="card-t">Solicitudes</div><span class="bdg ba">3 nuevas</span></div>
+          <div class="lrow" onclick="openS('s-solic')">
+            <div class="lav" style="background:var(--Bg);color:var(--B)">JM</div>
+            <div style="flex:1"><div class="ln">Juan Mora</div><div class="ld">CB 190 · 3 días</div></div>
+            <button class="btn btn-sm btn-r" onclick="event.stopPropagation();toast('✅ Aprobado')">OK</button>
           </div>
-          <div class="card">
-            <div class="card-h"><div class="card-t">Alertas urgentes</div></div>
-            <div class="notif"><div class="ndot" style="background:var(--R2)"></div><div class="ntx"><strong>SOAT vence en 3 días</strong> — AKT 125 (NOP-55E)</div><div class="ntm" style="color:var(--R2)">Urgente</div></div>
-            <div class="notif"><div class="ndot" style="background:var(--Y)"></div><div class="ntx"><strong>RTM vence 20 abr</strong> — Sandero (WXY-09D)</div><div class="ntm">5 días</div></div>
-            <div class="notif"><div class="ndot" style="background:var(--G)"></div><div class="ntx"><strong>Pago recibido</strong> $270.000 — Juan Mora</div><div class="ntm">Hace 1h</div></div>
+          <div class="lrow">
+            <div class="lav" style="background:var(--Yg);color:var(--Y)">LP</div>
+            <div style="flex:1"><div class="ln">Lina Pérez</div><div class="ld">Sandero · hoy 4pm</div></div>
+            <button class="btn btn-sm btn-r" onclick="event.stopPropagation();toast('✅ Aprobado')">OK</button>
           </div>
-        </div>
-      </div>
-
-      <div class="g2">
-        <div class="card">
-          <div class="card-h"><div class="card-t">Ingresos esta semana</div></div>
-          <div class="irow"><span class="il">Motos</span><div class="it"><div class="ifi" style="width:78%;background:var(--R)"></div></div><span class="ia" style="color:var(--R2)">$1.56M</span></div>
-          <div class="irow"><span class="il">Carros</span><div class="it"><div class="ifi" style="width:52%;background:var(--Y)"></div></div><span class="ia" style="color:var(--Y)">$1.04M</span></div>
-          <div class="irow"><span class="il">Depósitos</span><div class="it"><div class="ifi" style="width:30%;background:var(--B)"></div></div><span class="ia" style="color:var(--B)">$600k</span></div>
-          <div class="irow"><span class="il">Multas</span><div class="it"><div class="ifi" style="width:8%;background:var(--txt3)"></div></div><span class="ia" style="color:var(--txt3)">$160k</span></div>
-          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--f);display:flex;justify-content:space-between;align-items:center">
-            <span style="font-size:11px;color:var(--txt3);font-weight:700;text-transform:uppercase">Total semana</span>
-            <span style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:var(--Y)">$3.36M COP</span>
+          <div class="lrow">
+            <div class="lav" style="background:var(--Rg);color:var(--R2)">CR</div>
+            <div style="flex:1"><div class="ln">Carlos Ruiz</div><div class="ld">Cualquier moto</div></div>
+            <button class="btn btn-sm">Ver</button>
           </div>
         </div>
         <div class="card">
-          <div class="card-h"><div class="card-t">Por día</div></div>
-          <div class="bchart">
-            <div class="bcol"><div class="bfil" style="height:45px;background:var(--R)"></div><span class="blab">L</span><span class="bval" style="color:var(--R2)">420k</span></div>
-            <div class="bcol"><div class="bfil" style="height:64px;background:var(--R)"></div><span class="blab">M</span><span class="bval" style="color:var(--R2)">610k</span></div>
-            <div class="bcol"><div class="bfil" style="height:32px;background:var(--R)"></div><span class="blab">X</span><span class="bval" style="color:var(--R2)">305k</span></div>
-            <div class="bcol"><div class="bfil" style="height:56px;background:var(--R)"></div><span class="blab">J</span><span class="bval" style="color:var(--R2)">535k</span></div>
-            <div class="bcol"><div class="bfil" style="height:76px;background:var(--Y)"></div><span class="blab">V</span><span class="bval" style="color:var(--Y)">725k</span></div>
-            <div class="bcol"><div class="bfil" style="height:80px;background:var(--Y)"></div><span class="blab">S</span><span class="bval" style="color:var(--Y)">765k</span></div>
-            <div class="bcol"><div class="bfil" style="height:20px;background:var(--ink5)"></div><span class="blab">D</span><span class="bval" style="color:var(--txt3)">190k</span></div>
-          </div>
+          <div class="card-h"><div class="card-t">Alertas</div></div>
+          <div class="notif"><div class="ndot" style="background:var(--R2)"></div><div class="ntx"><strong>SOAT vence en 3 días</strong> — AKT 125</div><div class="ntm" style="color:var(--R2)">Urgente</div></div>
+          <div class="notif"><div class="ndot" style="background:var(--Y)"></div><div class="ntx"><strong>RTM vence 20 abr</strong> — Sandero</div><div class="ntm">5 días</div></div>
+          <div class="notif"><div class="ndot" style="background:var(--G)"></div><div class="ntx"><strong>Pago recibido</strong> $270k — J. Mora</div><div class="ntm">Hace 1h</div></div>
         </div>
       </div>
     </div>
-
-    <!-- ═══ FLOTA ═══ -->
-    <div id="v-flota" class="view">
-      <div class="sec-h">
-        <div><div class="sec-t">Mi Flota</div><div class="sec-s">Gestiona motos y carros disponibles</div></div>
-        <button class="btn btn-r" onclick="openS('s-veh')">+ Agregar vehículo</button>
-      </div>
-      <div class="stat-row">
-        <div class="sc sg"><div class="sc-lbl">Disponibles</div><div class="sc-num g">5</div><div class="sc-sub">Listos para arrendar</div></div>
-        <div class="sc sy"><div class="sc-lbl">En arriendo</div><div class="sc-num y">4</div><div class="sc-sub">Con clientes ahora</div></div>
-        <div class="sc sb"><div class="sc-lbl">Mantenimiento</div><div class="sc-num b">2</div><div class="sc-sub">En taller</div></div>
-        <div class="sc sr"><div class="sc-lbl">Doc. por vencer</div><div class="sc-num r">2</div><div class="sc-sub">Atención urgente</div></div>
-      </div>
-      <div class="vgrid">
-        <div class="vcard vrented" onclick="openS('s-vdet')"><span class="vc-em">🏍</span><div class="vc-nm">Honda CB 190</div><div class="vc-pl">LKM-42C</div><div class="vc-mt">2022 · 18,400 km · Azul</div><span class="bdg bo">En arriendo</span><div class="vc-ft"><span class="vc-pr">$90k/día</span><span style="font-size:11px;color:var(--txt3)">Juan Mora</span></div></div>
-        <div class="vcard vok" onclick="openS('s-vdet')"><span class="vc-em">🏍</span><div class="vc-nm">Yamaha FZ 150</div><div class="vc-pl">PQR-18A</div><div class="vc-mt">2021 · 24,100 km · Negra</div><span class="bdg bk">Disponible</span><div class="vc-ft"><span class="vc-pr">$75k/día</span><span style="font-size:11px;color:var(--txt3)">Libre</span></div></div>
-        <div class="vcard vrented" onclick="openS('s-vdet')"><span class="vc-em">🚗</span><div class="vc-nm">Renault Sandero</div><div class="vc-pl">WXY-09D</div><div class="vc-mt">2020 · 41,200 km · Gris</div><span class="bdg bo">En arriendo</span><div class="vc-ft"><span class="vc-pr">$120k/día</span><span style="font-size:11px;color:var(--txt3)">Lina Pérez</span></div></div>
-        <div class="vcard valert" onclick="openS('s-vdet')"><span class="vc-em">🏍</span><div class="vc-nm">AKT 125</div><div class="vc-pl">NOP-55E</div><div class="vc-mt">2019 · 32,800 km · Roja</div><span class="bdg ba">SOAT vence 3 días</span><div class="vc-ft"><span class="vc-pr">$60k/día</span><span style="font-size:11px;color:var(--txt3)">Libre</span></div></div>
-        <div class="vcard vok" onclick="openS('s-vdet')"><span class="vc-em">🚗</span><div class="vc-nm">Chevrolet Spark GT</div><div class="vc-pl">ABC-77F</div><div class="vc-mt">2021 · 28,500 km · Blanco</div><span class="bdg bk">Disponible</span><div class="vc-ft"><span class="vc-pr">$100k/día</span><span style="font-size:11px;color:var(--txt3)">Libre</span></div></div>
-        <div class="vcard vok" onclick="openS('s-vdet')"><span class="vc-em">🏍</span><div class="vc-nm">Suzuki GN 125</div><div class="vc-pl">DEF-33G</div><div class="vc-mt">2023 · 5,200 km · Verde</div><span class="bdg bk">Disponible</span><div class="vc-ft"><span class="vc-pr">$65k/día</span><span style="font-size:11px;color:var(--txt3)">Libre</span></div></div>
-        <div class="vcard vadd" onclick="openS('s-veh')"><div style="font-size:32px;opacity:.25">＋</div><div style="font-size:12px;color:var(--txt3);font-weight:700;text-transform:uppercase">Agregar vehículo</div></div>
-      </div>
-    </div>
-
-    <!-- ═══ RESERVAS ═══ -->
-    <div id="v-reservas" class="view">
-      <div class="sec-h">
-        <div><div class="sec-t">Reservas</div><div class="sec-s">Solicitudes llegadas por WhatsApp y página web</div></div>
-        <span class="bdg ba">3 pendientes de aprobar</span>
-      </div>
-      <div class="g64">
-        <div class="card">
-          <div class="card-h"><div class="card-t">Solicitudes pendientes</div></div>
-          <div class="tw"><table>
-            <thead><tr><th>Cliente</th><th>Canal</th><th>Vehículo</th><th>Fechas</th><th>Total</th><th>Acción</th></tr></thead>
-            <tbody>
-              <tr><td><b>Juan Mora</b></td><td><span class="bdg bk">WhatsApp</span></td><td>Honda CB 190</td><td>16-18 abr</td><td><span class="money">$270k</span></td><td><div style="display:flex;gap:5px"><button class="btn btn-sm btn-r" onclick="toast('✅ Aprobado y notificado por WhatsApp')">✓ Aprobar</button><button class="btn btn-sm btn-dg">✗</button></div></td></tr>
-              <tr><td><b>Lina Pérez</b></td><td><span class="bdg bi">Página web</span></td><td>Sandero</td><td>15 abr</td><td><span class="money">$120k</span></td><td><div style="display:flex;gap:5px"><button class="btn btn-sm btn-r" onclick="toast('✅ Aprobado')">✓ Aprobar</button><button class="btn btn-sm btn-dg">✗</button></div></td></tr>
-              <tr><td><b>Carlos Ruiz</b></td><td><span class="bdg bk">WhatsApp</span></td><td>Cualquier moto</td><td>19-20 abr</td><td><span class="money">$150k</span></td><td><div style="display:flex;gap:5px"><button class="btn btn-sm btn-r" onclick="toast('✅ Aprobado')">✓ Aprobar</button><button class="btn btn-sm btn-dg">✗</button></div></td></tr>
-            </tbody>
-          </table></div>
+    <div class="g2">
+      <div class="card">
+        <div class="card-h"><div class="card-t">Ingresos esta semana</div></div>
+        <div class="irow"><span class="il">Motos</span><div class="it"><div class="if" style="width:78%;background:var(--R)"></div></div><span class="ia" style="color:var(--R2)">$1.56M</span></div>
+        <div class="irow"><span class="il">Carros</span><div class="it"><div class="if" style="width:52%;background:var(--Y)"></div></div><span class="ia" style="color:var(--Y)">$1.04M</span></div>
+        <div class="irow"><span class="il">Depósitos</span><div class="it"><div class="if" style="width:30%;background:var(--B)"></div></div><span class="ia" style="color:var(--B)">$600k</span></div>
+        <div class="irow"><span class="il">Multas</span><div class="it"><div class="if" style="width:8%;background:var(--txt3)"></div></div><span class="ia" style="color:var(--txt3)">$160k</span></div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--fade);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:11px;color:var(--txt3);font-weight:700;text-transform:uppercase">Total semana</span>
+          <span style="font-family:Barlow Condensed,sans-serif;font-size:24px;font-weight:900;color:var(--Y)">$3.36M COP</span>
         </div>
-        <div class="card"><div class="card-h"><div class="card-t">Calendario abril</div></div><div id="cal"></div></div>
-      </div>
-    </div>
-
-    <!-- ═══ CONTRATOS ═══ -->
-    <div id="v-contratos" class="view">
-      <div class="sec-h">
-        <div><div class="sec-t">Contratos</div><div class="sec-s">Documentos digitales firmados por el cliente desde WhatsApp</div></div>
-        <button class="btn btn-r" onclick="openS('s-contrato')">+ Nuevo contrato</button>
       </div>
       <div class="card">
-        <div class="ccon" onclick="openS('s-cdet')"><div class="cnum">#CT-0041</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Juan Mora</div><div style="font-size:11px;color:var(--txt3)">Honda CB 190 · LKM-42C · 16-18 abr · 3 días</div></div><div style="text-align:right"><div class="money" style="font-size:15px">$270.000</div><span class="bdg bo" style="margin-top:4px;display:inline-flex">En curso</span></div></div>
-        <div class="ccon" onclick="openS('s-cdet')"><div class="cnum">#CT-0040</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Lina Pérez</div><div style="font-size:11px;color:var(--txt3)">Sandero · WXY-09D · 15 abr · 1 día</div></div><div style="text-align:right"><div class="money" style="font-size:15px">$120.000</div><span class="bdg bo" style="margin-top:4px;display:inline-flex">En curso</span></div></div>
-        <div class="ccon"><div class="cnum">#CT-0039</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Carlos Ruiz</div><div style="font-size:11px;color:var(--txt3)">Yamaha FZ 150 · PQR-18A · 12-13 abr · 2 días</div></div><div style="text-align:right"><div class="money" style="font-size:15px">$150.000</div><span class="bdg bk" style="margin-top:4px;display:inline-flex">Completado</span></div></div>
-        <div class="ccon"><div class="cnum">#CT-0038</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Andrea Muñoz</div><div style="font-size:11px;color:var(--txt3)">Spark GT · ABC-77F · 8-12 abr · 5 días</div></div><div style="text-align:right"><div class="money" style="font-size:15px">$600.000</div><span class="bdg bk" style="margin-top:4px;display:inline-flex">Completado</span></div></div>
-        <div class="ccon"><div class="cnum">#CT-0037</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Pedro Soto</div><div style="font-size:11px;color:var(--txt3)">AKT 125 · NOP-55E · 14 abr · 1 día</div></div><div style="text-align:right"><div class="money" style="font-size:15px;color:var(--R2)">$60.000</div><span class="bdg ba" style="margin-top:4px;display:inline-flex">Pago pendiente</span></div></div>
-      </div>
-    </div>
-
-    <!-- ═══ CLIENTES ═══ -->
-    <div id="v-clientes" class="view">
-      <div class="sec-h">
-        <div><div class="sec-t">Clientes</div><div class="sec-s">Historial, pagos y calificaciones de cada cliente</div></div>
-        <button class="btn btn-r" onclick="openS('s-cli')">+ Agregar</button>
-      </div>
-      <div class="g64">
-        <div class="card">
-          <div class="card-h"><div class="card-t">Base de clientes (28)</div></div>
-          <div class="lrow" onclick="openS('s-clidet')"><div class="lav" style="background:var(--Bg);color:var(--B)">JM</div><div style="flex:1"><div class="ln">Juan Mora</div><div class="ld">315 824 1190 · 5 arriendos · ⭐ Buen pagador</div></div><span class="bdg bk">Activo</span><div class="lv">$1.05M</div></div>
-          <div class="lrow"><div class="lav" style="background:var(--Rg);color:var(--R2)">LP</div><div style="flex:1"><div class="ln">Lina Pérez</div><div class="ld">314 556 7892 · 3 arriendos · Referida</div></div><span class="bdg bo">En arriendo</span><div class="lv">$480k</div></div>
-          <div class="lrow"><div class="lav" style="background:var(--Yg);color:var(--Y)">CR</div><div style="flex:1"><div class="ln">Carlos Ruiz</div><div class="ld">311 234 5678 · 8 arriendos · 🏆 Frecuente</div></div><span class="bdg bk">Activo</span><div class="lv">$1.8M</div></div>
-          <div class="lrow"><div class="lav" style="background:var(--Gg);color:var(--G)">AM</div><div style="flex:1"><div class="ln">Andrea Muñoz</div><div class="ld">320 987 6543 · 2 arriendos · Nueva</div></div><span class="bdg bk">Activo</span><div class="lv">$720k</div></div>
-          <div class="lrow"><div class="lav" style="background:var(--Rg);color:var(--R2)">PS</div><div style="flex:1"><div class="ln">Pedro Soto</div><div class="ld">317 444 2211 · Pago pendiente ⚠️</div></div><span class="bdg ba">Deuda</span><div class="lv" style="color:var(--R2)">$60k</div></div>
-        </div>
-        <div class="card">
-          <div class="card-h"><div class="card-t">Resumen</div></div>
-          <div class="pw"><div class="ph"><span class="pl">Frecuentes (5+ arriendos)</span><span class="pv" style="color:var(--Y)">8</span></div><div class="pb"><div class="pf" style="width:29%;background:var(--Y)"></div></div></div>
-          <div class="pw"><div class="ph"><span class="pl">Nuevos este mes</span><span class="pv" style="color:var(--G)">6</span></div><div class="pb"><div class="pf" style="width:21%;background:var(--G)"></div></div></div>
-          <div class="pw"><div class="ph"><span class="pl">Con deudas activas</span><span class="pv" style="color:var(--R2)">2</span></div><div class="pb"><div class="pf" style="width:7%;background:var(--R)"></div></div></div>
-          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--f)">
-            <div class="card-t" style="margin-bottom:10px">Cómo te encuentran</div>
-            <div style="font-size:12px;display:flex;flex-direction:column;gap:8px">
-              <div style="display:flex;justify-content:space-between"><span style="color:var(--txt2)">💬 WhatsApp / referidos</span><span style="font-weight:800;color:var(--G)">52%</span></div>
-              <div style="display:flex;justify-content:space-between"><span style="color:var(--txt2)">🌐 Página web</span><span style="font-weight:800;color:var(--B)">31%</span></div>
-              <div style="display:flex;justify-content:space-between"><span style="color:var(--txt2)">🚶 Visita directa</span><span style="font-weight:800;color:var(--txt3)">17%</span></div>
-            </div>
-          </div>
+        <div class="card-h"><div class="card-t">Por día</div></div>
+        <div class="bchart">
+          <div class="bcol"><div class="bfil" style="height:55px;background:var(--R)"></div><span class="blab">L</span><span class="bval" style="color:var(--R2)">420k</span></div>
+          <div class="bcol"><div class="bfil" style="height:80px;background:var(--R)"></div><span class="blab">M</span><span class="bval" style="color:var(--R2)">610k</span></div>
+          <div class="bcol"><div class="bfil" style="height:40px;background:var(--R)"></div><span class="blab">X</span><span class="bval" style="color:var(--R2)">305k</span></div>
+          <div class="bcol"><div class="bfil" style="height:70px;background:var(--R)"></div><span class="blab">J</span><span class="bval" style="color:var(--R2)">535k</span></div>
+          <div class="bcol"><div class="bfil" style="height:95px;background:var(--Y)"></div><span class="blab">V</span><span class="bval" style="color:var(--Y)">725k</span></div>
+          <div class="bcol"><div class="bfil" style="height:100px;background:var(--Y)"></div><span class="blab">S</span><span class="bval" style="color:var(--Y)">765k</span></div>
+          <div class="bcol"><div class="bfil" style="height:25px;background:var(--ink5)"></div><span class="blab">D</span><span class="bval" style="color:var(--txt3)">190k</span></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- ═══ FINANZAS ═══ -->
-    <div id="v-finanzas" class="view">
-      <div class="sec-h">
-        <div><div class="sec-t">Finanzas</div><div class="sec-s">Ingresos, gastos y métodos de pago</div></div>
-      </div>
-      <div class="stat-row">
-        <div class="sc sy"><div class="sc-lbl">Ingresos abril</div><div class="sc-num y">$8.4M</div><div class="sc-sub">↑ 22% vs marzo</div></div>
-        <div class="sc sb"><div class="sc-lbl">Depósitos retenidos</div><div class="sc-num b">$1.2M</div><div class="sc-sub">10 contratos activos</div></div>
-        <div class="sc sr"><div class="sc-lbl">Gastos</div><div class="sc-num r">$680k</div><div class="sc-sub">SOAT + mantenimiento</div></div>
-        <div class="sc sg"><div class="sc-lbl">Utilidad neta</div><div class="sc-num g">$7.72M</div><div class="sc-sub">92% margen</div></div>
-      </div>
-      <div class="g64">
-        <div class="card">
-          <div class="card-h"><div class="card-t">Últimas transacciones</div></div>
-          <div class="tw"><table>
-            <thead><tr><th>Descripción</th><th>Cliente</th><th>Método</th><th>Tipo</th><th>Valor</th></tr></thead>
-            <tbody>
-              <tr><td>Arriendo Honda CB 190<br><span style="font-size:10px;color:var(--txt3)">15 abr 10:23am</span></td><td>Juan Mora</td><td><span class="bdg bk">Nequi</span></td><td><span class="bdg bk">Ingreso</span></td><td><span class="money">+$270k</span></td></tr>
-              <tr><td>Arriendo Sandero</td><td>Lina Pérez</td><td><span class="bdg bi">Efectivo</span></td><td><span class="bdg bk">Ingreso</span></td><td><span class="money">+$120k</span></td></tr>
-              <tr><td>SOAT Yamaha FZ</td><td>—</td><td><span class="bdg bi">Tarjeta</span></td><td><span class="bdg ba">Gasto</span></td><td><span class="money" style="color:var(--R2)">-$95k</span></td></tr>
-              <tr><td>AKT 125 · Cobro pendiente</td><td>Pedro Soto</td><td><span class="bdg ba">Pendiente</span></td><td><span class="bdg bo">Por cobrar</span></td><td><span class="money">$60k</span></td></tr>
-            </tbody>
-          </table></div>
-        </div>
-        <div class="card">
-          <div class="card-h"><div class="card-t">Métodos de pago</div></div>
-          <div class="pw"><div class="ph"><span class="pl">Nequi</span><span class="pv" style="color:var(--Y)">44%</span></div><div class="pb"><div class="pf" style="width:44%;background:var(--Y)"></div></div></div>
-          <div class="pw"><div class="ph"><span class="pl">Efectivo</span><span class="pv" style="color:var(--R2)">31%</span></div><div class="pb"><div class="pf" style="width:31%;background:var(--R)"></div></div></div>
-          <div class="pw"><div class="ph"><span class="pl">Bancolombia</span><span class="pv" style="color:var(--B)">19%</span></div><div class="pb"><div class="pf" style="width:19%;background:var(--B)"></div></div></div>
-          <div class="pw"><div class="ph"><span class="pl">Daviplata</span><span class="pv" style="color:var(--G)">6%</span></div><div class="pb"><div class="pf" style="width:6%;background:var(--G)"></div></div></div>
-          <div style="margin-top:14px;padding:12px;background:var(--Rg2);border:1px solid rgba(232,25,44,.2);border-radius:8px;display:flex;justify-content:space-between;align-items:center">
-            <div><div style="font-size:13px;font-weight:700">⚠️ Pedro Soto debe</div><div style="font-size:11px;color:var(--txt3)">AKT 125 · 14 abr · pendiente</div></div>
-            <div style="text-align:right"><div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:var(--R2)">$60.000</div><button class="btn btn-sm" style="margin-top:4px" onclick="toast('📱 Recordatorio enviado por WhatsApp')">Recordar</button></div>
-          </div>
-        </div>
-      </div>
+  <!-- FLOTA -->
+  <div id="v-flota" class="view">
+    <div class="stat-row">
+      <div class="sc sg"><div class="sc-lbl">Disponibles</div><div class="sc-num g">5</div></div>
+      <div class="sc sy"><div class="sc-lbl">En arriendo</div><div class="sc-num y">4</div></div>
+      <div class="sc sb"><div class="sc-lbl">Mantenimiento</div><div class="sc-num b">2</div></div>
+      <div class="sc sr"><div class="sc-lbl">Doc. por vencer</div><div class="sc-num r">2</div></div>
     </div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+      <button class="btn btn-r" onclick="openS('s-veh')">+ Agregar vehículo</button>
+    </div>
+    <div class="vgrid">
+      <div class="vcard vrented" onclick="openS('s-vdet')"><span class="vc-em">🏍</span><div class="vc-nm">Honda CB 190</div><div class="vc-pl">LKM-42C</div><div class="vc-mt">2022 · 18,400 km · Azul</div><span class="bdg bo">En arriendo</span><div class="vc-ft"><span class="vc-pr">$90k/día</span><span style="font-size:11px;color:var(--txt3)">Juan Mora</span></div></div>
+      <div class="vcard vok" onclick="openS('s-vdet')"><span class="vc-em">🏍</span><div class="vc-nm">Yamaha FZ 150</div><div class="vc-pl">PQR-18A</div><div class="vc-mt">2021 · 24,100 km · Negra</div><span class="bdg bk">Disponible</span><div class="vc-ft"><span class="vc-pr">$75k/día</span><span style="font-size:11px;color:var(--txt3)">Libre</span></div></div>
+      <div class="vcard vrented" onclick="openS('s-vdet')"><span class="vc-em">🚗</span><div class="vc-nm">Renault Sandero</div><div class="vc-pl">WXY-09D</div><div class="vc-mt">2020 · 41,200 km · Gris</div><span class="bdg bo">En arriendo</span><div class="vc-ft"><span class="vc-pr">$120k/día</span><span style="font-size:11px;color:var(--txt3)">Lina Pérez</span></div></div>
+      <div class="vcard valert" onclick="openS('s-vdet')"><span class="vc-em">🏍</span><div class="vc-nm">AKT 125</div><div class="vc-pl">NOP-55E</div><div class="vc-mt">2019 · 32,800 km · Roja</div><span class="bdg ba">SOAT vence 3 días</span><div class="vc-ft"><span class="vc-pr">$60k/día</span><span style="font-size:11px;color:var(--txt3)">Libre</span></div></div>
+      <div class="vcard vok" onclick="openS('s-vdet')"><span class="vc-em">🚗</span><div class="vc-nm">Chevrolet Spark GT</div><div class="vc-pl">ABC-77F</div><div class="vc-mt">2021 · 28,500 km · Blanco</div><span class="bdg bk">Disponible</span><div class="vc-ft"><span class="vc-pr">$100k/día</span><span style="font-size:11px;color:var(--txt3)">Libre</span></div></div>
+      <div class="vcard vok" onclick="openS('s-vdet')"><span class="vc-em">🏍</span><div class="vc-nm">Suzuki GN 125</div><div class="vc-pl">DEF-33G</div><div class="vc-mt">2023 · 5,200 km · Verde</div><span class="bdg bk">Disponible</span><div class="vc-ft"><span class="vc-pr">$65k/día</span><span style="font-size:11px;color:var(--txt3)">Libre</span></div></div>
+      <div class="vcard vadd" onclick="openS('s-veh')"><div style="font-size:32px;opacity:.25">＋</div><div style="font-size:12px;color:var(--txt3);font-weight:700;text-transform:uppercase">Agregar vehículo</div></div>
+    </div>
+  </div>
 
-    <!-- ═══ ALERTAS ═══ -->
-    <div id="v-alertas" class="view">
-      <div class="sec-h">
-        <div><div class="sec-t">Alertas</div><div class="sec-s">SOAT, revisión técnica, contratos por vencer y mantenimientos</div></div>
+  <!-- RESERVAS -->
+  <div id="v-reservas" class="view">
+    <div class="g64">
+      <div class="card">
+        <div class="card-h"><div class="card-t">Solicitudes pendientes</div><span class="bdg ba">3 nuevas</span></div>
+        <div class="tw"><table>
+          <thead><tr><th>Cliente</th><th>Vehículo</th><th>Fechas</th><th>Total</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td><b>Juan Mora</b><br><span style="font-size:10px;color:var(--txt3)">WhatsApp</span></td><td>Honda CB 190</td><td>16-18 abr</td><td><span class="money">$270k</span></td><td><div style="display:flex;gap:5px"><button class="btn btn-sm btn-r" onclick="toast('✅ Aprobado y notificado por WhatsApp')">✓ Aprobar</button><button class="btn btn-sm btn-dg">✗</button></div></td></tr>
+            <tr><td><b>Lina Pérez</b><br><span style="font-size:10px;color:var(--txt3)">Link web</span></td><td>Sandero</td><td>15 abr</td><td><span class="money">$120k</span></td><td><div style="display:flex;gap:5px"><button class="btn btn-sm btn-r" onclick="toast('✅ Aprobado')">✓ Aprobar</button><button class="btn btn-sm btn-dg">✗</button></div></td></tr>
+            <tr><td><b>Carlos Ruiz</b><br><span style="font-size:10px;color:var(--txt3)">WhatsApp</span></td><td>Cualquier moto</td><td>19-20 abr</td><td><span class="money">$150k</span></td><td><div style="display:flex;gap:5px"><button class="btn btn-sm btn-r" onclick="toast('✅ Aprobado')">✓ Aprobar</button><button class="btn btn-sm btn-dg">✗</button></div></td></tr>
+          </tbody>
+        </table></div>
       </div>
-      <div class="g2">
-        <div class="card">
-          <div class="card-h"><div class="card-t">Documentos de la flota</div></div>
-          <div class="alr danger"><div class="alr-ic">🚨</div><div class="alr-b"><div class="alr-t">SOAT — AKT 125 (NOP-55E)</div><div class="alr-s">Vence el 18 de abril de 2026</div></div><div class="alr-d" style="color:var(--R2)">3 días</div></div>
-          <div class="alr warn"><div class="alr-ic">⚠️</div><div class="alr-b"><div class="alr-t">RTM — Renault Sandero (WXY-09D)</div><div class="alr-s">Vence el 20 de abril de 2026</div></div><div class="alr-d" style="color:var(--Y)">5 días</div></div>
-          <div class="alr warn"><div class="alr-ic">📋</div><div class="alr-b"><div class="alr-t">SOAT — Yamaha FZ 150 (PQR-18A)</div><div class="alr-s">Vence el 28 de abril de 2026</div></div><div class="alr-d" style="color:var(--Y)">13 días</div></div>
-          <div class="alr good"><div class="alr-ic">✅</div><div class="alr-b"><div class="alr-t">SOAT — Honda CB 190 (LKM-42C)</div><div class="alr-s">Vence el 14 de enero de 2027</div></div><div class="alr-d" style="color:var(--G)">274 días</div></div>
-          <div class="alr good"><div class="alr-ic">✅</div><div class="alr-b"><div class="alr-t">RTM — Spark GT (ABC-77F)</div><div class="alr-s">Vence el 5 de septiembre de 2026</div></div><div class="alr-d" style="color:var(--G)">143 días</div></div>
-        </div>
-        <div class="card">
-          <div class="card-h"><div class="card-t">Contratos que vencen</div></div>
-          <div class="alr warn"><div class="alr-ic">🔑</div><div class="alr-b"><div class="alr-t">Juan Mora — Honda CB 190</div><div class="alr-s">Regresa el 18 de abril</div></div><div class="alr-d" style="color:var(--Y)">Mañana</div></div>
-          <div class="alr warn"><div class="alr-ic">🔑</div><div class="alr-b"><div class="alr-t">Lina Pérez — Sandero</div><div class="alr-s">Regresa hoy 6pm</div></div><div class="alr-d" style="color:var(--R2)">Hoy</div></div>
-          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--f)">
-            <div class="card-t" style="margin-bottom:10px">Mantenimientos</div>
-            <div class="alr warn"><div class="alr-ic">🔧</div><div class="alr-b"><div class="alr-t">Cambio aceite — AKT 125</div><div class="alr-s">Programado 20 abr</div></div></div>
-            <div class="alr good"><div class="alr-ic">🔧</div><div class="alr-b"><div class="alr-t">Revisión frenos — Sandero</div><div class="alr-s">Programado 25 abr</div></div></div>
+      <div class="card"><div class="card-h"><div class="card-t">Calendario abril</div></div><div id="cal"></div></div>
+    </div>
+  </div>
+
+  <!-- CONTRATOS -->
+  <div id="v-contratos" class="view">
+    <div class="card">
+      <div class="card-h">
+        <div class="card-t">Contratos digitales</div>
+        <button class="btn btn-r" onclick="openS('s-contrato')">+ Nuevo contrato</button>
+      </div>
+      <div class="ccon" onclick="openS('s-cdet')"><div class="cnum">#CT-0041</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Juan Mora</div><div style="font-size:11px;color:var(--txt3)">Honda CB 190 · LKM-42C · 16-18 abr · 3 días</div></div><div style="text-align:right"><div class="money" style="font-size:15px">$270.000</div><span class="bdg bo" style="margin-top:4px;display:inline-flex">En curso</span></div></div>
+      <div class="ccon" onclick="openS('s-cdet')"><div class="cnum">#CT-0040</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Lina Pérez</div><div style="font-size:11px;color:var(--txt3)">Sandero · WXY-09D · 15 abr · 1 día</div></div><div style="text-align:right"><div class="money" style="font-size:15px">$120.000</div><span class="bdg bo" style="margin-top:4px;display:inline-flex">En curso</span></div></div>
+      <div class="ccon"><div class="cnum">#CT-0039</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Carlos Ruiz</div><div style="font-size:11px;color:var(--txt3)">Yamaha FZ 150 · PQR-18A · 12-13 abr · 2 días</div></div><div style="text-align:right"><div class="money" style="font-size:15px">$150.000</div><span class="bdg bk" style="margin-top:4px;display:inline-flex">Completado</span></div></div>
+      <div class="ccon"><div class="cnum">#CT-0038</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Andrea Muñoz</div><div style="font-size:11px;color:var(--txt3)">Spark GT · ABC-77F · 8-12 abr · 5 días</div></div><div style="text-align:right"><div class="money" style="font-size:15px">$600.000</div><span class="bdg bk" style="margin-top:4px;display:inline-flex">Completado</span></div></div>
+      <div class="ccon"><div class="cnum">#CT-0037</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Pedro Soto</div><div style="font-size:11px;color:var(--txt3)">AKT 125 · NOP-55E · 14 abr · 1 día</div></div><div style="text-align:right"><div class="money" style="font-size:15px;color:var(--R2)">$60.000</div><span class="bdg ba" style="margin-top:4px;display:inline-flex">Pago pendiente</span></div></div>
+    </div>
+  </div>
+
+  <!-- CLIENTES -->
+  <div id="v-clientes" class="view">
+    <div class="g64">
+      <div class="card">
+        <div class="card-h"><div class="card-t">Clientes (28)</div><button class="btn btn-r" onclick="openS('s-cli')">+ Agregar</button></div>
+        <div class="lrow" onclick="openS('s-clidet')"><div class="lav" style="background:var(--Bg);color:var(--B)">JM</div><div style="flex:1"><div class="ln">Juan Mora</div><div class="ld">315 824 1190 · 5 arriendos · ⭐ Buen pagador</div></div><span class="bdg bk">Activo</span><div class="lv">$1.05M</div></div>
+        <div class="lrow"><div class="lav" style="background:var(--Rg);color:var(--R2)">LP</div><div style="flex:1"><div class="ln">Lina Pérez</div><div class="ld">314 556 7892 · 3 arriendos · Referida</div></div><span class="bdg bo">En arriendo</span><div class="lv">$480k</div></div>
+        <div class="lrow"><div class="lav" style="background:var(--Yg);color:var(--Y)">CR</div><div style="flex:1"><div class="ln">Carlos Ruiz</div><div class="ld">311 234 5678 · 8 arriendos · 🏆 Frecuente</div></div><span class="bdg bk">Activo</span><div class="lv">$1.8M</div></div>
+        <div class="lrow"><div class="lav" style="background:var(--Gg);color:var(--G)">AM</div><div style="flex:1"><div class="ln">Andrea Muñoz</div><div class="ld">320 987 6543 · 2 arriendos · Nueva</div></div><span class="bdg bk">Activo</span><div class="lv">$720k</div></div>
+        <div class="lrow"><div class="lav" style="background:var(--Rg);color:var(--R2)">PS</div><div style="flex:1"><div class="ln">Pedro Soto</div><div class="ld">317 444 2211 · Pago pendiente ⚠️</div></div><span class="bdg ba">Deuda</span><div class="lv" style="color:var(--R2)">$60k</div></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="card-t">Resumen</div></div>
+        <div class="pw"><div class="ph"><span class="pl">Clientes frecuentes</span><span class="pv" style="color:var(--Y)">8</span></div><div class="pb"><div class="pf" style="width:29%;background:var(--Y)"></div></div></div>
+        <div class="pw"><div class="ph"><span class="pl">Nuevos este mes</span><span class="pv" style="color:var(--G)">6</span></div><div class="pb"><div class="pf" style="width:21%;background:var(--G)"></div></div></div>
+        <div class="pw"><div class="ph"><span class="pl">Con deudas</span><span class="pv" style="color:var(--R2)">2</span></div><div class="pb"><div class="pf" style="width:7%;background:var(--R)"></div></div></div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--fade)">
+          <div class="card-t" style="margin-bottom:10px">Cómo llegan</div>
+          <div style="font-size:12px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--txt2)">💬 WhatsApp / referidos</span><span style="font-weight:800;color:var(--G)">52%</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--txt2)">🌐 Página web</span><span style="font-weight:800;color:var(--B)">31%</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--txt2)">🚶 Visita directa</span><span style="font-weight:800;color:var(--txt3)">17%</span></div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- ═══ CLIENTE (switch) ═══ -->
-    <div id="v-cliente" class="view">
-      <div class="sec-h">
-        <div><div class="sec-t">Vista del cliente</div><div class="sec-s">Así ve tu negocio alguien que llega por el link</div></div>
-        <button class="btn btn-r" onclick="switchToClient()">🔍 Ver en pantalla completa</button>
+  <!-- FINANZAS -->
+  <div id="v-finanzas" class="view">
+    <div class="stat-row">
+      <div class="sc sy"><div class="sc-lbl">Ingresos abril</div><div class="sc-num y">$8.4M</div><div class="sc-sub">↑ 22% vs marzo</div></div>
+      <div class="sc sb"><div class="sc-lbl">Depósitos retenidos</div><div class="sc-num b">$1.2M</div><div class="sc-sub">10 contratos activos</div></div>
+      <div class="sc sr"><div class="sc-lbl">Gastos</div><div class="sc-num r">$680k</div><div class="sc-sub">SOAT + mantenimiento</div></div>
+      <div class="sc sg"><div class="sc-lbl">Utilidad neta</div><div class="sc-num g">$7.72M</div><div class="sc-sub">92% margen</div></div>
+    </div>
+    <div class="g64">
+      <div class="card">
+        <div class="card-h"><div class="card-t">Últimas transacciones</div></div>
+        <div class="tw"><table>
+          <thead><tr><th>Descripción</th><th>Cliente</th><th>Método</th><th>Tipo</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Arriendo Honda CB 190<br><span style="font-size:10px;color:var(--txt3)">15 abr 10:23am</span></td><td>Juan Mora</td><td><span class="bdg bk">Nequi</span></td><td><span class="bdg bk">Ingreso</span></td><td><span class="money">+$270k</span></td></tr>
+            <tr><td>Arriendo Sandero</td><td>Lina Pérez</td><td><span class="bdg bi">Efectivo</span></td><td><span class="bdg bk">Ingreso</span></td><td><span class="money">+$120k</span></td></tr>
+            <tr><td>SOAT Yamaha FZ</td><td>—</td><td><span class="bdg bi">Tarjeta</span></td><td><span class="bdg ba">Gasto</span></td><td><span class="money" style="color:var(--R2)">-$95k</span></td></tr>
+            <tr><td>AKT 125 · Pedro Soto</td><td>Pedro Soto</td><td><span class="bdg ba">Pendiente</span></td><td><span class="bdg bo">Por cobrar</span></td><td><span class="money">$60k</span></td></tr>
+          </tbody>
+        </table></div>
       </div>
-      <div style="background:var(--ink3);border:1px solid var(--f);border-radius:14px;overflow:hidden;max-width:390px;margin:0 auto;">
-        <div style="background:var(--ink4);padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--f)">
-          <div style="display:flex;gap:5px"><div style="width:10px;height:10px;border-radius:50%;background:#ff5f56"></div><div style="width:10px;height:10px;border-radius:50%;background:#febc2e"></div><div style="width:10px;height:10px;border-radius:50%;background:#28c840"></div></div>
-          <div style="background:var(--ink3);border-radius:4px;padding:3px 10px;font-size:10px;color:var(--txt3);flex:1;text-align:center;font-family:'DM Mono',monospace">alquilerla14.co</div>
-        </div>
-        <div style="height:520px;overflow-y:auto;" id="client-preview">
-          <!-- mini client preview -->
-          <div style="background:linear-gradient(160deg,#0d0000,#180008,#0d0b00);padding:40px 20px 32px;text-align:center;position:relative;overflow:hidden;">
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;color:var(--Y);letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;background:rgba(255,214,0,.13);border:1px solid rgba(255,214,0,.3);border-radius:20px;display:inline-block;margin-bottom:14px">La Dorada, Caldas 🇨🇴</div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:46px;font-weight:900;font-style:italic;color:#fff;line-height:.92;letter-spacing:-1.5px;margin-bottom:10px">ALQUILER<br><span style="color:var(--R2)">LA 14</span></div>
-            <div style="font-size:13px;color:rgba(255,255,255,.45);margin-bottom:22px">Motos y carros por días · La Dorada</div>
-            <button onclick="switchToClient()" style="background:var(--R);color:#fff;border:none;padding:14px 28px;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:.05em;box-shadow:0 6px 24px rgba(232,25,44,.45)">📱 Reservar por WhatsApp</button>
-          </div>
-          <div style="background:var(--ink2);display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--f)">
-            <div style="padding:14px 8px;text-align:center;border-right:1px solid var(--f)"><div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:var(--Y)">$60k</div><div style="font-size:10px;color:var(--txt2)">desde / día</div></div>
-            <div style="padding:14px 8px;text-align:center;border-right:1px solid var(--f)"><div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:var(--G)">11</div><div style="font-size:10px;color:var(--txt2)">vehículos</div></div>
-            <div style="padding:14px 8px;text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:var(--R2)">24h</div><div style="font-size:10px;color:var(--txt2)">disponible</div></div>
-          </div>
-          <div style="background:#fff;padding:20px 16px">
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:#111;text-transform:uppercase;margin-bottom:14px">Vehículos disponibles</div>
-            <div style="background:#fff;border:2px solid #eee;border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
-              <div style="background:linear-gradient(135deg,#fff0ee,#fff5e6);height:100px;display:flex;align-items:center;justify-content:center;font-size:56px">🏍</div>
-              <div style="padding:12px 14px">
-                <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;color:#111;margin-bottom:2px">Honda CB 190</div>
-                <div style="font-size:11px;color:#888;margin-bottom:10px">2022 · Hasta 2 personas · Casco incluido</div>
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:var(--R)">$90.000 <span style="font-size:11px;color:#888;font-family:Barlow,sans-serif;font-weight:400">/ día</span></div>
-                  <div style="display:inline-flex;align-items:center;gap:4px;background:#eafaf3;color:#0a7a4a;font-size:10px;font-weight:700;padding:4px 9px;border-radius:20px"><div style="width:5px;height:5px;border-radius:50%;background:#0a7a4a"></div>Disponible</div>
-                </div>
-                <button onclick="toast('📱 Reservando Honda CB 190...')" style="width:100%;background:var(--R);border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:800;color:#fff;cursor:pointer;text-transform:uppercase;letter-spacing:.05em">Reservar ahora</button>
-              </div>
-            </div>
-            <div style="background:#fff;border:2px solid #eee;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06)">
-              <div style="background:linear-gradient(135deg,#eef0ff,#e6f4ff);height:100px;display:flex;align-items:center;justify-content:center;font-size:56px">🚗</div>
-              <div style="padding:12px 14px">
-                <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;color:#111;margin-bottom:2px">Chevrolet Spark GT</div>
-                <div style="font-size:11px;color:#888;margin-bottom:10px">2021 · Hasta 5 personas · A/C</div>
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:var(--R)">$100.000 <span style="font-size:11px;color:#888;font-family:Barlow,sans-serif;font-weight:400">/ día</span></div>
-                  <div style="display:inline-flex;align-items:center;gap:4px;background:#eafaf3;color:#0a7a4a;font-size:10px;font-weight:700;padding:4px 9px;border-radius:20px"><div style="width:5px;height:5px;border-radius:50%;background:#0a7a4a"></div>Disponible</div>
-                </div>
-                <button onclick="toast('📱 Reservando Spark GT...')" style="width:100%;background:var(--R);border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:800;color:#fff;cursor:pointer;text-transform:uppercase;letter-spacing:.05em">Reservar ahora</button>
-              </div>
-            </div>
-          </div>
+      <div class="card">
+        <div class="card-h"><div class="card-t">Métodos de pago</div></div>
+        <div class="pw"><div class="ph"><span class="pl">Nequi</span><span class="pv" style="color:var(--Y)">44%</span></div><div class="pb"><div class="pf" style="width:44%;background:var(--Y)"></div></div></div>
+        <div class="pw"><div class="ph"><span class="pl">Efectivo</span><span class="pv" style="color:var(--R2)">31%</span></div><div class="pb"><div class="pf" style="width:31%;background:var(--R)"></div></div></div>
+        <div class="pw"><div class="ph"><span class="pl">Bancolombia</span><span class="pv" style="color:var(--B)">19%</span></div><div class="pb"><div class="pf" style="width:19%;background:var(--B)"></div></div></div>
+        <div class="pw"><div class="ph"><span class="pl">Daviplata</span><span class="pv" style="color:var(--G)">6%</span></div><div class="pb"><div class="pf" style="width:6%;background:var(--G)"></div></div></div>
+        <div style="margin-top:14px;padding:12px;background:var(--Rg2);border:1px solid rgba(232,25,44,.2);border-radius:8px;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:13px;font-weight:700">Pedro Soto</div><div style="font-size:11px;color:var(--txt3)">AKT 125 · 14 abr</div></div>
+          <div style="text-align:right"><div style="font-family:Barlow Condensed,sans-serif;font-size:18px;font-weight:900;color:var(--R2)">$60.000</div><button class="btn btn-sm" style="margin-top:4px" onclick="toast('📱 Recordatorio enviado por WhatsApp')">Recordar</button></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- ═══ WHATSAPP ═══ -->
-    <div id="v-whatsapp" class="view">
-      <div class="sec-h">
-        <div><div class="sec-t">WhatsApp Bot</div><div class="sec-s">Mensajes que se envían automáticamente a tus clientes</div></div>
-        <span class="bdg bk">4 activos</span>
+  <!-- ALERTAS -->
+  <div id="v-alertas" class="view">
+    <div class="g2">
+      <div class="card">
+        <div class="card-h"><div class="card-t">Documentos de la flota</div></div>
+        <div class="alr danger"><div class="alr-ic">🚨</div><div class="alr-b"><div class="alr-t">SOAT — AKT 125 (NOP-55E)</div><div class="alr-s">Vence el 18 de abril de 2026</div></div><div class="alr-d" style="color:var(--R2)">3 días</div></div>
+        <div class="alr warn"><div class="alr-ic">⚠️</div><div class="alr-b"><div class="alr-t">RTM — Renault Sandero (WXY-09D)</div><div class="alr-s">Vence el 20 de abril de 2026</div></div><div class="alr-d" style="color:var(--Y)">5 días</div></div>
+        <div class="alr warn"><div class="alr-ic">📋</div><div class="alr-b"><div class="alr-t">SOAT — Yamaha FZ 150 (PQR-18A)</div><div class="alr-s">Vence el 28 de abril de 2026</div></div><div class="alr-d" style="color:var(--Y)">13 días</div></div>
+        <div class="alr good"><div class="alr-ic">✅</div><div class="alr-b"><div class="alr-t">SOAT — Honda CB 190 (LKM-42C)</div><div class="alr-s">Vence el 14 de enero de 2027</div></div><div class="alr-d" style="color:var(--G)">274 días</div></div>
+        <div class="alr good"><div class="alr-ic">✅</div><div class="alr-b"><div class="alr-t">RTM — Spark GT (ABC-77F)</div><div class="alr-s">Vence el 5 de septiembre de 2026</div></div><div class="alr-d" style="color:var(--G)">143 días</div></div>
       </div>
-      <div class="g64">
-        <div class="card">
-          <div class="card-h"><div class="card-t">Mensajes configurados</div></div>
-          <div class="wa" style="border-color:var(--Y)"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;font-weight:800">Bienvenida a nuevo cliente</span><span class="bdg bk">Activo</span></div><div style="font-size:12px;color:var(--txt2);line-height:1.7">"Hola [nombre] 👋 Bienvenido a <b>Alquiler La 14</b>. Para arrendar necesito tu cédula y depósito. ¿Qué vehículo te interesa?"</div></div>
-          <div class="wa" style="border-color:var(--R)"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;font-weight:800">Recordatorio de devolución</span><span class="bdg bk">Activo</span></div><div style="font-size:12px;color:var(--txt2);line-height:1.7">"Hola [nombre] ⏰ El contrato de <b>[vehículo]</b> vence hoy a las [hora]. ¡Te esperamos pronto!"</div></div>
-          <div class="wa" style="border-color:var(--R2)"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;font-weight:800">Cobro pendiente</span><span class="bdg bk">Activo</span></div><div style="font-size:12px;color:var(--txt2);line-height:1.7">"Hola [nombre] 🔔 Tienes pendiente el pago de <b>$[valor]</b>. Nequi: 315-XXX-XXXX. ¡Gracias!"</div></div>
-          <div class="wa" style="border-color:var(--G)"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;font-weight:800">Confirmación de reserva</span><span class="bdg bk">Activo</span></div><div style="font-size:12px;color:var(--txt2);line-height:1.7">"✅ ¡Reserva confirmada! <b>[vehículo]</b> del <b>[fecha]</b> al <b>[fecha]</b>. Total: <b>$[valor]</b>. ¡Nos vemos!"</div></div>
-        </div>
-        <div class="card">
-          <div class="card-h"><div class="card-t">Estadísticas</div></div>
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <div style="background:var(--Yg2);border:1px solid rgba(255,214,0,.18);border-radius:10px;padding:16px;text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:900;color:var(--Y);line-height:1">94%</div><div style="font-size:11px;color:var(--txt3);margin-top:4px">Mensajes abiertos por clientes</div></div>
-            <div style="background:var(--Rg2);border:1px solid rgba(232,25,44,.18);border-radius:10px;padding:16px;text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:900;color:var(--R2);line-height:1">52%</div><div style="font-size:11px;color:var(--txt3);margin-top:4px">Clientes llegaron por WhatsApp</div></div>
-            <button class="btn btn-r btn-full" onclick="toast('✏️ Editando mensajes...')">Editar mensajes</button>
-          </div>
+      <div class="card">
+        <div class="card-h"><div class="card-t">Contratos por vencer</div></div>
+        <div class="alr warn"><div class="alr-ic">🔑</div><div class="alr-b"><div class="alr-t">Juan Mora — Honda CB 190</div><div class="alr-s">Regresa el 18 de abril</div></div><div class="alr-d" style="color:var(--Y)">Mañana</div></div>
+        <div class="alr warn"><div class="alr-ic">🔑</div><div class="alr-b"><div class="alr-t">Lina Pérez — Sandero</div><div class="alr-s">Regresa hoy 6pm</div></div><div class="alr-d" style="color:var(--R2)">Hoy</div></div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--fade)">
+          <div class="card-t" style="margin-bottom:10px">Mantenimientos</div>
+          <div class="alr warn"><div class="alr-ic">🔧</div><div class="alr-b"><div class="alr-t">Cambio aceite — AKT 125</div><div class="alr-s">Programado 20 abr</div></div></div>
+          <div class="alr good"><div class="alr-ic">🔧</div><div class="alr-b"><div class="alr-t">Revisión frenos — Sandero</div><div class="alr-s">Programado 25 abr</div></div></div>
         </div>
       </div>
     </div>
+  </div>
 
-  </div><!-- /page -->
+  <!-- LANDING -->
+  <div id="v-landing" class="view">
+    <div style="margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px"><div style="font-size:10px;color:var(--txt3);font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Tu link público</div><div style="font-family:DM Mono,monospace;font-size:12px;color:var(--Y);background:var(--ink3);padding:8px 14px;border-radius:8px;display:inline-block">alquilerla14.co</div></div>
+      <button class="btn btn-y" onclick="toast('🔗 Link copiado al portapapeles')">Copiar link</button>
+      <button class="btn" onclick="toast('📤 Compartido por WhatsApp')">Compartir</button>
+    </div>
+    <div class="land">
+      <div class="lhero">
+        <div style="position:relative;z-index:1">
+          <div class="lbdg">La Dorada, Caldas 🇨🇴</div>
+          <div class="ltit">ALQUILER<br><span>LA 14</span></div>
+          <div class="lsub">Motos y carros por días · Rápido y seguro</div>
+          <button class="lcta" onclick="toast('📱 Abriendo WhatsApp...')">Reservar por WhatsApp</button>
+        </div>
+      </div>
+      <div class="lsect">
+        <div class="lstit">Vehículos disponibles</div>
+        <div class="lpub"><div class="limg">🏍</div><div class="lbdy"><div class="lnm">Honda CB 190</div><div class="lsp">2022 · Hasta 2 personas</div><div style="display:flex;align-items:baseline;gap:8px"><div class="lpr">$90.000 <span>/ día</span></div><span class="bdg bk">Disponible</span></div><button class="lvbtn" onclick="toast('📱 Reservando Honda CB 190...')">Reservar ahora</button></div></div>
+        <div class="lpub"><div class="limg">🚗</div><div class="lbdy"><div class="lnm">Chevrolet Spark GT</div><div class="lsp">2021 · Hasta 5 personas · A/C</div><div style="display:flex;align-items:baseline;gap:8px"><div class="lpr">$100.000 <span>/ día</span></div><span class="bdg bk">Disponible</span></div><button class="lvbtn" onclick="toast('📱 Reservando Spark GT...')">Reservar ahora</button></div></div>
+      </div>
+      <div class="lsect" style="background:#fff5f5;padding:20px">
+        <div class="lstit">¿Cómo funciona?</div>
+        <div class="lstep"><div class="lstepn">1</div><div><div class="lstept">Elige tu vehículo</div><div class="lsteps">Revisa precios y disponibilidad</div></div></div>
+        <div class="lstep"><div class="lstepn">2</div><div><div class="lstept">Escríbenos por WhatsApp</div><div class="lsteps">Confirmamos en minutos</div></div></div>
+        <div class="lstep"><div class="lstepn">3</div><div><div class="lstept">Firma y paga</div><div class="lsteps">Nequi, Bancolombia o efectivo</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP -->
+  <div id="v-whatsapp" class="view">
+    <div class="g64">
+      <div class="card">
+        <div class="card-h"><div class="card-t">Mensajes automáticos</div><span class="bdg bk">WhatsApp Business</span></div>
+        <div class="wa" style="border-color:var(--Y)"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;font-weight:800">Bienvenida</span><span class="bdg bk">Activo</span></div><div style="font-size:12px;color:var(--txt2);line-height:1.7">"Hola [nombre] 👋 Bienvenido a <b>Alquiler La 14</b>. Para arrendar necesito tu cédula y depósito. ¿Qué vehículo te interesa?"</div></div>
+        <div class="wa" style="border-color:var(--R)"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;font-weight:800">Recordatorio devolución</span><span class="bdg bk">Activo</span></div><div style="font-size:12px;color:var(--txt2);line-height:1.7">"Hola [nombre] ⏰ El contrato de <b>[vehículo]</b> vence hoy a las [hora]. ¡Te esperamos!"</div></div>
+        <div class="wa" style="border-color:var(--R2)"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;font-weight:800">Cobro pendiente</span><span class="bdg bk">Activo</span></div><div style="font-size:12px;color:var(--txt2);line-height:1.7">"Hola [nombre] 🔔 Pendiente el pago de <b>$[valor]</b>. Nequi: 315-XXX-XXXX. Gracias."</div></div>
+        <div class="wa" style="border-color:var(--G)"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;font-weight:800">Confirmación</span><span class="bdg bk">Activo</span></div><div style="font-size:12px;color:var(--txt2);line-height:1.7">"✅ ¡Reserva confirmada! [vehículo] del [fecha] al [fecha]. Total: $[valor]. ¡Nos vemos!"</div></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="card-t">Estadísticas</div></div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="background:var(--Yg2);border:1px solid rgba(255,214,0,.18);border-radius:10px;padding:14px;text-align:center"><div style="font-family:Barlow Condensed,sans-serif;font-size:40px;font-weight:900;color:var(--Y)">94%</div><div style="font-size:11px;color:var(--txt3)">Tasa de apertura</div></div>
+          <div style="background:var(--Rg2);border:1px solid rgba(232,25,44,.18);border-radius:10px;padding:14px;text-align:center"><div style="font-family:Barlow Condensed,sans-serif;font-size:40px;font-weight:900;color:var(--R2)">52%</div><div style="font-size:11px;color:var(--txt3)">Clientes por WhatsApp</div></div>
+          <button class="btn btn-r btn-full" onclick="toast('✏️ Editando mensajes...')">Editar mensajes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /content -->
 </div><!-- /main -->
-</div><!-- /panel-mode -->
+</div><!-- /shell -->
 
-<!-- BOTTOM NAV (mobile) -->
-<nav class="bot-nav" id="bot-nav">
+<!-- BOTTOM NAV -->
+<nav class="bot-nav">
   <div class="bn">
     <div class="bt on" id="bt-dashboard" onclick="nav('dashboard')"><div class="bt-ic">📊</div><div>Inicio</div></div>
     <div class="bt" id="bt-flota" onclick="nav('flota')"><div class="bt-ic">🏍</div><div>Flota</div></div>
@@ -894,192 +703,41 @@ tbody tr:last-child td{border-bottom:none;}
   </div>
 </nav>
 
-
-<!-- ════════════════════════════════════════
-     CLIENT MODE — lo que ven los clientes
-════════════════════════════════════════ -->
-<div id="client-mode">
-
-  <!-- Sticky topbar -->
-  <div class="cl-bar">
-    <div class="cl-bar-logo">
-      <div style="background:rgba(255,255,255,.2);border-radius:7px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;font-style:italic;color:#fff">14</div>
-      <div class="cl-bar-name">ALQUILER LA 14</div>
-    </div>
-    <a class="cl-bar-wa" href="#" onclick="toast('📱 Abriendo WhatsApp...');return false">💬 WhatsApp</a>
-  </div>
-
-  <!-- Hero -->
-  <div class="cl-hero">
-    <div style="position:relative;z-index:1">
-      <div class="cl-hero-tag">La Dorada, Caldas · Colombia 🇨🇴</div>
-      <div class="cl-hero-tit">ALQUILER<br><span>LA 14</span></div>
-      <div class="cl-hero-sub">Motos y carros por días · Rápido, seguro y sin complicaciones</div>
-      <div>
-        <button class="cl-cta" onclick="toast('📱 Abriendo WhatsApp para reservar...')">📱 Reservar por WhatsApp</button>
-        <button class="cl-cta2" onclick="document.getElementById('cl-vehs').scrollIntoView({behavior:'smooth'})">Ver vehículos</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stats bar -->
-  <div class="cl-stats">
-    <div class="cl-stat"><div class="cl-stat-n">$60k</div><div class="cl-stat-l">Desde / día</div></div>
-    <div class="cl-stat"><div class="cl-stat-n">11</div><div class="cl-stat-l">Vehículos</div></div>
-    <div class="cl-stat"><div class="cl-stat-n">24h</div><div class="cl-stat-l">Disponible</div></div>
-  </div>
-
-  <!-- Vehicles -->
-  <div class="cl-sec" id="cl-vehs" style="background:#fff;">
-    <div class="cl-sec-tit">Vehículos disponibles</div>
-    <div class="cl-veh">
-      <div class="cl-veh-img moto">🏍</div>
-      <div class="cl-veh-body">
-        <div class="cl-veh-nm">Honda CB 190</div>
-        <div class="cl-veh-spec">2022 · Hasta 2 personas · Casco incluido</div>
-        <div class="cl-veh-price-row">
-          <div class="cl-veh-price">$90.000 <span>/ día</span></div>
-          <div class="cl-avail">Disponible</div>
-        </div>
-        <button class="cl-veh-btn" onclick="toast('📱 Reservando Honda CB 190...')">Reservar ahora</button>
-      </div>
-    </div>
-    <div class="cl-veh">
-      <div class="cl-veh-img moto">🏍</div>
-      <div class="cl-veh-body">
-        <div class="cl-veh-nm">Yamaha FZ 150</div>
-        <div class="cl-veh-spec">2021 · Hasta 2 personas · Casco incluido</div>
-        <div class="cl-veh-price-row">
-          <div class="cl-veh-price">$75.000 <span>/ día</span></div>
-          <div class="cl-avail">Disponible</div>
-        </div>
-        <button class="cl-veh-btn" onclick="toast('📱 Reservando Yamaha FZ 150...')">Reservar ahora</button>
-      </div>
-    </div>
-    <div class="cl-veh">
-      <div class="cl-veh-img carro">🚗</div>
-      <div class="cl-veh-body">
-        <div class="cl-veh-nm">Renault Sandero</div>
-        <div class="cl-veh-spec">2020 · Hasta 5 personas · A/C</div>
-        <div class="cl-veh-price-row">
-          <div class="cl-veh-price">$120.000 <span>/ día</span></div>
-          <div class="cl-busy">En arriendo</div>
-        </div>
-        <button class="cl-veh-btn" style="background:#aaa;box-shadow:none" onclick="toast('⏳ Este vehículo está ocupado. Te avisamos cuando esté libre.')">No disponible hoy</button>
-      </div>
-    </div>
-    <div class="cl-veh">
-      <div class="cl-veh-img carro">🚗</div>
-      <div class="cl-veh-body">
-        <div class="cl-veh-nm">Chevrolet Spark GT</div>
-        <div class="cl-veh-spec">2021 · Hasta 5 personas · A/C</div>
-        <div class="cl-veh-price-row">
-          <div class="cl-veh-price">$100.000 <span>/ día</span></div>
-          <div class="cl-avail">Disponible</div>
-        </div>
-        <button class="cl-veh-btn" onclick="toast('📱 Reservando Spark GT...')">Reservar ahora</button>
-      </div>
-    </div>
-    <div class="cl-veh">
-      <div class="cl-veh-img moto">🏍</div>
-      <div class="cl-veh-body">
-        <div class="cl-veh-nm">AKT 125</div>
-        <div class="cl-veh-spec">2019 · Hasta 2 personas · Económica</div>
-        <div class="cl-veh-price-row">
-          <div class="cl-veh-price">$60.000 <span>/ día</span></div>
-          <div class="cl-avail">Disponible</div>
-        </div>
-        <button class="cl-veh-btn" onclick="toast('📱 Reservando AKT 125...')">Reservar ahora</button>
-      </div>
-    </div>
-    <div class="cl-veh">
-      <div class="cl-veh-img moto">🏍</div>
-      <div class="cl-veh-body">
-        <div class="cl-veh-nm">Suzuki GN 125</div>
-        <div class="cl-veh-spec">2023 · Nueva · Hasta 2 personas</div>
-        <div class="cl-veh-price-row">
-          <div class="cl-veh-price">$65.000 <span>/ día</span></div>
-          <div class="cl-avail">Disponible</div>
-        </div>
-        <button class="cl-veh-btn" onclick="toast('📱 Reservando Suzuki GN 125...')">Reservar ahora</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- How it works -->
-  <div class="cl-how">
-    <div class="cl-sec-tit" style="color:#111">¿Cómo arrendar?</div>
-    <div class="cl-step"><div class="cl-step-n">1</div><div><div class="cl-step-t">Elige tu vehículo</div><div class="cl-step-s">Revisa disponibilidad y precios arriba</div></div></div>
-    <div class="cl-step"><div class="cl-step-n">2</div><div><div class="cl-step-t">Escríbenos por WhatsApp</div><div class="cl-step-s">Confirmamos en minutos — sin filas</div></div></div>
-    <div class="cl-step"><div class="cl-step-n">3</div><div><div class="cl-step-t">Firma digital desde tu celular</div><div class="cl-step-s">Sin papel. El contrato llega por WhatsApp</div></div></div>
-    <div class="cl-step"><div class="cl-step-n">4</div><div><div class="cl-step-t">Paga como quieras</div><div class="cl-step-s">Nequi, Bancolombia, Daviplata o efectivo</div></div></div>
-  </div>
-
-  <!-- Trust -->
-  <div class="cl-trust">
-    <div class="cl-trust-tit">¿Por qué elegirnos?</div>
-    <div class="cl-trust-grid">
-      <div class="cl-chip"><div class="cl-chip-ic">✅</div>Vehículos al día</div>
-      <div class="cl-chip"><div class="cl-chip-ic">⚡</div>Respuesta rápida</div>
-      <div class="cl-chip"><div class="cl-chip-ic">📄</div>Contrato digital</div>
-      <div class="cl-chip"><div class="cl-chip-ic">🛡️</div>Seguro incluido</div>
-      <div class="cl-chip"><div class="cl-chip-ic">📍</div>La Dorada, Caldas</div>
-      <div class="cl-chip"><div class="cl-chip-ic">💳</div>Múltiples pagos</div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <div class="cl-foot">
-    <div class="cl-foot-logo">
-      <div class="cl-foot-pill"><span>14</span></div>
-      <div class="cl-foot-name">ALQUILER LA 14</div>
-    </div>
-    <div class="cl-foot-city">La Dorada, Caldas · Colombia</div>
-    <button class="cl-foot-wa" onclick="toast('📱 Abriendo WhatsApp...')">💬 Reservar por WhatsApp</button>
-    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--f)">
-      <button onclick="switchToPanel()" style="background:transparent;border:1px solid var(--f);color:var(--txt3);padding:8px 16px;border-radius:8px;font-size:11px;cursor:pointer">← Volver al panel del propietario</button>
-    </div>
-  </div>
-
-</div><!-- /client-mode -->
-
-
-<!-- BOTTOM SHEETS -->
-
+<!-- SHEETS -->
 <div class="overlay" id="s-contrato">
   <div class="sheet">
-    <div class="sh-hnd"></div>
-    <div class="sh-hd"><div class="sh-t">📄 Nuevo Contrato</div><div class="sh-x" onclick="closeS('s-contrato')">✕</div></div>
-    <div class="sh-bd">
+    <div class="sh-handle"></div>
+    <div class="sh-head"><div class="sh-t">📄 Nuevo Contrato</div><div class="sh-x" onclick="closeS('s-contrato')">✕</div></div>
+    <div class="sh-body">
       <div class="frow"><div class="fg"><label class="fl">Cliente</label><input class="fi" type="text" placeholder="Juan Mora"></div><div class="fg"><label class="fl">Cédula</label><input class="fi" type="text" placeholder="1.234.567.890"></div></div>
       <div class="fg"><label class="fl">WhatsApp</label><input class="fi" type="tel" placeholder="315 824 1190"></div>
-      <div class="fg"><label class="fl">Vehículo</label><select class="fi"><option>Honda CB 190 — LKM-42C ($90k/día)</option><option>Yamaha FZ 150 — PQR-18A ($75k/día)</option><option>Renault Sandero — WXY-09D ($120k/día)</option><option>AKT 125 — NOP-55E ($60k/día)</option><option>Chevrolet Spark GT — ABC-77F ($100k/día)</option><option>Suzuki GN 125 — DEF-33G ($65k/día)</option></select></div>
+      <div class="fg"><label class="fl">Vehículo</label><select class="fi"><option>Honda CB 190 — LKM-42C</option><option>Yamaha FZ 150 — PQR-18A</option><option>Renault Sandero — WXY-09D</option><option>AKT 125 — NOP-55E</option><option>Chevrolet Spark GT — ABC-77F</option></select></div>
       <div class="frow"><div class="fg"><label class="fl">Fecha inicio</label><input class="fi" type="date" value="2026-04-15"></div><div class="fg"><label class="fl">Fecha fin</label><input class="fi" type="date" value="2026-04-18"></div></div>
       <div class="frow"><div class="fg"><label class="fl">Valor / día</label><input class="fi" type="text" placeholder="90.000"></div><div class="fg"><label class="fl">Depósito garantía</label><input class="fi" type="text" placeholder="200.000"></div></div>
-      <div class="fg"><label class="fl">Observaciones</label><input class="fi" type="text" placeholder="Estado del vehículo, combustible..."></div>
-      <div style="background:var(--Yg2);border:1px solid rgba(255,214,0,.22);border-radius:8px;padding:12px;font-size:12px;color:var(--Y)">📱 El cliente recibirá el contrato por <b>WhatsApp</b> y lo firma desde su celular.</div>
+      <div class="fg"><label class="fl">Observaciones</label><input class="fi" type="text" placeholder="Estado vehículo, combustible..."></div>
+      <div style="background:var(--Yg2);border:1px solid rgba(255,214,0,.22);border-radius:8px;padding:11px;font-size:12px;color:var(--Y)">📱 El contrato se enviará por <b>WhatsApp</b> para firma digital del cliente.</div>
     </div>
-    <div class="sh-ft"><button class="btn" onclick="closeS('s-contrato')">Cancelar</button><button class="btn btn-r" onclick="closeS('s-contrato');toast('📄 Contrato #CT-0042 creado y enviado por WhatsApp')">Crear y enviar</button></div>
+    <div class="sh-foot"><button class="btn" onclick="closeS('s-contrato')">Cancelar</button><button class="btn btn-r" onclick="closeS('s-contrato');toast('📄 Contrato #CT-0042 creado y enviado por WhatsApp')">Crear y enviar</button></div>
   </div>
 </div>
 
 <div class="overlay" id="s-cdet">
   <div class="sheet">
-    <div class="sh-hnd"></div>
-    <div class="sh-hd"><div class="sh-t">Contrato #CT-0041</div><div class="sh-x" onclick="closeS('s-cdet')">✕</div></div>
-    <div class="sh-bd">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px"><div><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900">Juan Mora</div><div style="font-size:11px;color:var(--txt3)">CC 1.076.234.891 · 315 824 1190</div></div><span class="bdg bo">En curso</span></div>
+    <div class="sh-handle"></div>
+    <div class="sh-head"><div class="sh-t">Contrato #CT-0041</div><div class="sh-x" onclick="closeS('s-cdet')">✕</div></div>
+    <div class="sh-body">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px"><div><div style="font-family:Barlow Condensed,sans-serif;font-size:24px;font-weight:900">Juan Mora</div><div style="font-size:11px;color:var(--txt3)">CC 1.076.234.891 · 315 824 1190</div></div><span class="bdg bo">En curso</span></div>
       <div style="background:var(--ink3);border-radius:10px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:11px;font-size:12px">
         <div><div style="color:var(--txt3);margin-bottom:2px">Vehículo</div><div style="font-weight:700">Honda CB 190</div></div>
-        <div><div style="color:var(--txt3);margin-bottom:2px">Placa</div><div style="font-family:'DM Mono',monospace;font-weight:700">LKM-42C</div></div>
+        <div><div style="color:var(--txt3);margin-bottom:2px">Placa</div><div style="font-family:DM Mono,monospace;font-weight:700">LKM-42C</div></div>
         <div><div style="color:var(--txt3);margin-bottom:2px">Inicio</div><div style="font-weight:700">16 abr 2026</div></div>
         <div><div style="color:var(--txt3);margin-bottom:2px">Fin</div><div style="font-weight:700">18 abr 2026</div></div>
         <div><div style="color:var(--txt3);margin-bottom:2px">Valor/día</div><div class="money" style="font-size:15px">$90.000</div></div>
-        <div><div style="color:var(--txt3);margin-bottom:2px">Total</div><div class="money" style="font-size:22px">$270.000</div></div>
+        <div><div style="color:var(--txt3);margin-bottom:2px">Total</div><div class="money" style="font-size:20px">$270.000</div></div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn-sm" onclick="toast('📱 Recordatorio enviado')">💬 Recordar</button>
-        <button class="btn btn-sm" onclick="toast('📄 Reenviado')">📤 Reenviar</button>
+        <button class="btn btn-sm" onclick="toast('📄 Contrato reenviado')">📤 Reenviar</button>
         <button class="btn btn-sm btn-r" onclick="closeS('s-cdet');toast('✅ Marcado como devuelto')">✓ Devuelto</button>
       </div>
     </div>
@@ -1088,49 +746,49 @@ tbody tr:last-child td{border-bottom:none;}
 
 <div class="overlay" id="s-solic">
   <div class="sheet">
-    <div class="sh-hnd"></div>
-    <div class="sh-hd"><div class="sh-t">Solicitud de arriendo</div><div class="sh-x" onclick="closeS('s-solic')">✕</div></div>
-    <div class="sh-bd">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><div class="lav" style="background:var(--Bg);color:var(--B);width:46px;height:46px;font-size:17px">JM</div><div><div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900">Juan Mora</div><div style="font-size:11px;color:var(--txt3)">Via WhatsApp · hace 12 min</div></div></div>
+    <div class="sh-handle"></div>
+    <div class="sh-head"><div class="sh-t">Solicitud de arriendo</div><div class="sh-x" onclick="closeS('s-solic')">✕</div></div>
+    <div class="sh-body">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><div class="lav" style="background:var(--Bg);color:var(--B);width:46px;height:46px;font-size:17px">JM</div><div><div style="font-family:Barlow Condensed,sans-serif;font-size:20px;font-weight:900">Juan Mora</div><div style="font-size:11px;color:var(--txt3)">Via WhatsApp · hace 12 min</div></div></div>
       <div style="background:var(--ink3);border-radius:10px;padding:13px;font-size:12px;color:var(--txt2);line-height:1.7;margin-bottom:14px">"Buenas! Quiero arrendar la Honda CB 190 para el miércoles 16 hasta el viernes 18. ¿Está disponible? 🏍"</div>
       <div style="background:var(--ink3);border-radius:10px;padding:13px;display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px">
         <div><span style="color:var(--txt3)">Vehículo:</span><br><b>Honda CB 190</b></div>
         <div><span style="color:var(--txt3)">Fechas:</span><br><b>16-18 abr · 3 días</b></div>
         <div><span style="color:var(--txt3)">Total:</span><br><div class="money" style="font-size:18px">$270.000</div></div>
-        <div><span style="color:var(--txt3)">Disponibilidad:</span><br><span class="bdg bk">Libre</span></div>
+        <div><span style="color:var(--txt3)">Disponible:</span><br><span class="bdg bk">Libre</span></div>
       </div>
     </div>
-    <div class="sh-ft"><button class="btn btn-dg btn-sm" onclick="closeS('s-solic');toast('❌ Rechazado')">Rechazar</button><button class="btn btn-r" onclick="closeS('s-solic');openS('s-contrato');toast('✅ Aprobado — creando contrato...')">✓ Aprobar y crear contrato</button></div>
+    <div class="sh-foot"><button class="btn btn-dg btn-sm" onclick="closeS('s-solic');toast('❌ Rechazado')">Rechazar</button><button class="btn btn-r" onclick="closeS('s-solic');openS('s-contrato');toast('✅ Aprobado — creando contrato...')">✓ Aprobar y crear contrato</button></div>
   </div>
 </div>
 
 <div class="overlay" id="s-veh">
   <div class="sheet">
-    <div class="sh-hnd"></div>
-    <div class="sh-hd"><div class="sh-t">🚗 Agregar Vehículo</div><div class="sh-x" onclick="closeS('s-veh')">✕</div></div>
-    <div class="sh-bd">
+    <div class="sh-handle"></div>
+    <div class="sh-head"><div class="sh-t">🚗 Agregar Vehículo</div><div class="sh-x" onclick="closeS('s-veh')">✕</div></div>
+    <div class="sh-body">
       <div class="frow"><div class="fg"><label class="fl">Tipo</label><select class="fi"><option>🏍 Moto</option><option>🚗 Carro</option></select></div><div class="fg"><label class="fl">Año</label><input class="fi" type="text" placeholder="2022"></div></div>
       <div class="fg"><label class="fl">Marca y modelo</label><input class="fi" type="text" placeholder="Honda CB 190"></div>
-      <div class="frow"><div class="fg"><label class="fl">Placa</label><input class="fi" type="text" placeholder="ABC-12D" style="font-family:'DM Mono',monospace;letter-spacing:.1em"></div><div class="fg"><label class="fl">Precio / día</label><input class="fi" type="text" placeholder="90.000"></div></div>
+      <div class="frow"><div class="fg"><label class="fl">Placa</label><input class="fi" type="text" placeholder="ABC-12D" style="font-family:DM Mono,monospace;letter-spacing:.1em"></div><div class="fg"><label class="fl">Precio / día</label><input class="fi" type="text" placeholder="90.000"></div></div>
       <div class="frow"><div class="fg"><label class="fl">SOAT vence</label><input class="fi" type="date"></div><div class="fg"><label class="fl">RTM vence</label><input class="fi" type="date"></div></div>
     </div>
-    <div class="sh-ft"><button class="btn" onclick="closeS('s-veh')">Cancelar</button><button class="btn btn-r" onclick="closeS('s-veh');toast('🚗 Vehículo agregado a la flota')">Guardar vehículo</button></div>
+    <div class="sh-foot"><button class="btn" onclick="closeS('s-veh')">Cancelar</button><button class="btn btn-r" onclick="closeS('s-veh');toast('🚗 Vehículo agregado a la flota')">Guardar</button></div>
   </div>
 </div>
 
 <div class="overlay" id="s-vdet">
   <div class="sheet">
-    <div class="sh-hnd"></div>
-    <div class="sh-hd"><div class="sh-t">🏍 Honda CB 190</div><div class="sh-x" onclick="closeS('s-vdet')">✕</div></div>
-    <div class="sh-bd">
+    <div class="sh-handle"></div>
+    <div class="sh-head"><div class="sh-t">🏍 Honda CB 190</div><div class="sh-x" onclick="closeS('s-vdet')">✕</div></div>
+    <div class="sh-body">
       <div style="text-align:center;background:linear-gradient(135deg,#1a0006,#1a0a00);border-radius:12px;padding:24px;margin-bottom:14px;font-size:64px">🏍</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;font-size:12px;background:var(--ink3);border-radius:10px;padding:14px;margin-bottom:13px">
-        <div><span style="color:var(--txt3)">Placa</span><br><b style="font-family:'DM Mono',monospace">LKM-42C</b></div>
+        <div><span style="color:var(--txt3)">Placa</span><br><b style="font-family:DM Mono,monospace">LKM-42C</b></div>
         <div><span style="color:var(--txt3)">Año</span><br><b>2022</b></div>
-        <div><span style="color:var(--txt3)">Km</span><br><b>18,400 km</b></div>
+        <div><span style="color:var(--txt3)">Kilometraje</span><br><b>18,400 km</b></div>
         <div><span style="color:var(--txt3)">Precio/día</span><br><b class="money" style="font-size:17px">$90.000</b></div>
-        <div><span style="color:var(--txt3)">SOAT</span><br><b style="color:var(--G)">14 ene 2027 ✅</b></div>
-        <div><span style="color:var(--txt3)">RTM</span><br><b style="color:var(--G)">20 jun 2026 ✅</b></div>
+        <div><span style="color:var(--txt3)">SOAT vence</span><br><b style="color:var(--G)">14 ene 2027</b></div>
+        <div><span style="color:var(--txt3)">RTM vence</span><br><b style="color:var(--G)">20 jun 2026</b></div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn-sm" onclick="toast('✏️ Editando...')">✏️ Editar</button>
@@ -1143,30 +801,30 @@ tbody tr:last-child td{border-bottom:none;}
 
 <div class="overlay" id="s-cli">
   <div class="sheet">
-    <div class="sh-hnd"></div>
-    <div class="sh-hd"><div class="sh-t">👤 Nuevo Cliente</div><div class="sh-x" onclick="closeS('s-cli')">✕</div></div>
-    <div class="sh-bd">
-      <div class="frow"><div class="fg"><label class="fl">Nombre completo</label><input class="fi" type="text" placeholder="Juan Mora García"></div><div class="fg"><label class="fl">Cédula</label><input class="fi" type="text" placeholder="1.234.567.890"></div></div>
+    <div class="sh-handle"></div>
+    <div class="sh-head"><div class="sh-t">👤 Nuevo Cliente</div><div class="sh-x" onclick="closeS('s-cli')">✕</div></div>
+    <div class="sh-body">
+      <div class="frow"><div class="fg"><label class="fl">Nombre</label><input class="fi" type="text" placeholder="Juan Mora García"></div><div class="fg"><label class="fl">Cédula</label><input class="fi" type="text" placeholder="1.234.567.890"></div></div>
       <div class="fg"><label class="fl">WhatsApp</label><input class="fi" type="tel" placeholder="315 824 1190"></div>
       <div class="fg"><label class="fl">¿Cómo nos conoció?</label><select class="fi"><option>WhatsApp / referido</option><option>Página web</option><option>Redes sociales</option><option>Visita directa</option></select></div>
     </div>
-    <div class="sh-ft"><button class="btn" onclick="closeS('s-cli')">Cancelar</button><button class="btn btn-r" onclick="closeS('s-cli');toast('👤 Cliente registrado')">Guardar</button></div>
+    <div class="sh-foot"><button class="btn" onclick="closeS('s-cli')">Cancelar</button><button class="btn btn-r" onclick="closeS('s-cli');toast('👤 Cliente registrado correctamente')">Guardar</button></div>
   </div>
 </div>
 
 <div class="overlay" id="s-clidet">
   <div class="sheet">
-    <div class="sh-hnd"></div>
-    <div class="sh-hd"><div class="sh-t">👤 Juan Mora</div><div class="sh-x" onclick="closeS('s-clidet')">✕</div></div>
-    <div class="sh-bd">
+    <div class="sh-handle"></div>
+    <div class="sh-head"><div class="sh-t">👤 Juan Mora</div><div class="sh-x" onclick="closeS('s-clidet')">✕</div></div>
+    <div class="sh-body">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
         <div class="lav" style="background:var(--Bg);color:var(--B);width:50px;height:50px;font-size:19px">JM</div>
-        <div><div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900">Juan Mora</div><div style="font-size:11px;color:var(--txt3)">CC 1.076.234.891 · 315 824 1190</div></div>
+        <div><div style="font-family:Barlow Condensed,sans-serif;font-size:22px;font-weight:900">Juan Mora</div><div style="font-size:11px;color:var(--txt3)">CC 1.076.234.891 · 315 824 1190</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
-        <div style="background:var(--Yg2);border-radius:9px;padding:12px;text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:var(--Y)">5</div><div style="font-size:10px;color:var(--txt3)">Arriendos</div></div>
-        <div style="background:var(--Rg2);border-radius:9px;padding:12px;text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:var(--R2)">$1.05M</div><div style="font-size:10px;color:var(--txt3)">Total</div></div>
-        <div style="background:var(--Gg);border-radius:9px;padding:12px;text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:var(--G)">⭐ 5</div><div style="font-size:10px;color:var(--txt3)">Rating</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+        <div style="background:var(--Yg2);border-radius:9px;padding:11px;text-align:center"><div style="font-family:Barlow Condensed,sans-serif;font-size:26px;font-weight:900;color:var(--Y)">5</div><div style="font-size:10px;color:var(--txt3)">Arriendos</div></div>
+        <div style="background:var(--Rg2);border-radius:9px;padding:11px;text-align:center"><div style="font-family:Barlow Condensed,sans-serif;font-size:20px;font-weight:900;color:var(--R2)">$1.05M</div><div style="font-size:10px;color:var(--txt3)">Total</div></div>
+        <div style="background:var(--Gg);border-radius:9px;padding:11px;text-align:center"><div style="font-family:Barlow Condensed,sans-serif;font-size:26px;font-weight:900;color:var(--G)">⭐5</div><div style="font-size:10px;color:var(--txt3)">Rating</div></div>
       </div>
       <div style="display:flex;gap:8px"><button class="btn btn-sm" onclick="toast('📱 Abriendo WhatsApp...')">💬 WhatsApp</button><button class="btn btn-sm btn-r" onclick="closeS('s-clidet');openS('s-contrato')">📄 Nuevo contrato</button></div>
     </div>
@@ -1177,101 +835,78 @@ tbody tr:last-child td{border-bottom:none;}
 <div class="toast" id="toast"><span id="toast-msg">Listo</span></div>
 
 <script>
-// ─── NAVIGATION ───────────────────────────────
-const TITLES = {
-  dashboard:"Dashboard", flota:"Mi Flota", reservas:"Reservas",
-  contratos:"Contratos", clientes:"Clientes", finanzas:"Finanzas",
-  alertas:"Alertas", cliente:"Vista del cliente", whatsapp:"WhatsApp Bot"
-};
+// NAV
+const TITLES = {dashboard:"Dashboard",flota:"Mi Flota",reservas:"Reservas",contratos:"Contratos",clientes:"Clientes",finanzas:"Finanzas",alertas:"Alertas",landing:"Mi Página Web",whatsapp:"WhatsApp Bot"};
 let cur = "dashboard";
-
 function nav(v) {
-  // Hide current view
-  document.getElementById("v-"+cur)?.classList.remove("on");
-  // Deactivate all sidebar items + bottom tabs
-  document.querySelectorAll(".ni").forEach(n=>n.classList.remove("on"));
-  document.querySelectorAll(".bt").forEach(t=>t.classList.remove("on"));
-  // Special case: "cliente" switches to full client mode
-  if (v === "cliente") { switchToClient(); return; }
-  // Show new view
+  document.getElementById("v-" + cur)?.classList.remove("on");
+  document.querySelectorAll(".ni").forEach(n => n.classList.remove("on"));
+  document.querySelectorAll(".bt").forEach(t => t.classList.remove("on"));
   cur = v;
-  document.getElementById("v-"+v)?.classList.add("on");
-  // Activate sidebar nav item
-  document.querySelectorAll(".ni[data-v='"+v+"']").forEach(n=>n.classList.add("on"));
-  // Activate bottom tab
-  const bt = document.getElementById("bt-"+v);
+  document.getElementById("v-" + v)?.classList.add("on");
+  document.querySelectorAll(".ni[data-v='" + v + "']").forEach(n => n.classList.add("on"));
+  const bt = document.getElementById("bt-" + v);
   if (bt) bt.classList.add("on");
-  // Update title
-  document.getElementById("ptitle").textContent = TITLES[v]||v;
-  // Scroll to top
-  window.scrollTo(0,0);
-  document.querySelector(".page")?.scrollTo(0,0);
+  document.getElementById("ptitle").textContent = TITLES[v] || v;
+  window.scrollTo(0, 0);
+  document.querySelector(".content")?.scrollTo(0, 0);
 }
-
-// Wire sidebar nav items
-document.querySelectorAll(".ni[data-v]").forEach(n=>{
-  n.addEventListener("click",()=>nav(n.getAttribute("data-v")));
+// Wire sidebar nav
+document.querySelectorAll(".ni[data-v]").forEach(n => {
+  n.addEventListener("click", () => nav(n.getAttribute("data-v")));
 });
 
-// ─── MODE SWITCH ─────────────────────────────
-function switchToClient() {
-  document.getElementById("panel-mode").style.display = "none";
-  document.getElementById("client-mode").style.display = "block";
-  document.getElementById("bot-nav").style.display = "none";
-  window.scrollTo(0,0);
-  toast("🌐 Vista del cliente — así ve Alquiler La 14 el público");
-}
-function switchToPanel() {
-  document.getElementById("panel-mode").style.display = "flex";
-  document.getElementById("client-mode").style.display = "none";
-  // restore bot-nav if mobile
-  if (window.innerWidth <= 720) document.getElementById("bot-nav").style.display = "block";
-  window.scrollTo(0,0);
-}
-
-// ─── SHEETS ──────────────────────────────────
+// SHEETS
 function openS(id) { document.getElementById(id)?.classList.add("open"); }
 function closeS(id) { document.getElementById(id)?.classList.remove("open"); }
-
-document.querySelectorAll(".overlay").forEach(o=>{
-  o.addEventListener("click",e=>{ if(e.target===o) o.classList.remove("open"); });
+document.querySelectorAll(".overlay").forEach(o => {
+  o.addEventListener("click", e => { if (e.target === o) o.classList.remove("open"); });
   const s = o.querySelector(".sheet");
-  if(!s) return;
-  let sy=0;
-  s.addEventListener("touchstart",e=>{sy=e.touches[0].clientY;},{passive:true});
-  s.addEventListener("touchend",e=>{if(e.changedTouches[0].clientY-sy>75)o.classList.remove("open");});
+  if (!s) return;
+  let sy = 0;
+  s.addEventListener("touchstart", e => { sy = e.touches[0].clientY; }, {passive:true});
+  s.addEventListener("touchend", e => { if (e.changedTouches[0].clientY - sy > 75) o.classList.remove("open"); });
 });
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape") document.querySelectorAll(".overlay.open").forEach(o=>o.classList.remove("open"));
-});
+document.addEventListener("keydown", e => { if (e.key === "Escape") document.querySelectorAll(".overlay.open").forEach(o => o.classList.remove("open")); });
 
-// ─── TOAST ──────────────────────────────────
+// TOAST
 let tt;
 function toast(msg) {
-  document.getElementById("toast-msg").textContent=msg;
-  const t=document.getElementById("toast");
+  document.getElementById("toast-msg").textContent = msg;
+  const t = document.getElementById("toast");
   t.classList.add("show");
   clearTimeout(tt);
-  tt=setTimeout(()=>t.classList.remove("show"),3200);
+  tt = setTimeout(() => t.classList.remove("show"), 3000);
 }
 
-// ─── MINI CALENDAR ─────────────────────────
-(function(){
-  const el=document.getElementById("cal");
-  if(!el) return;
-  const D=["L","M","X","J","V","S","D"];
-  const S=["","","free","free","busy","full","busy","busy","free","free","free","busy","full","full","free","busy","today","out","out","busy","full","free","free","free","busy","busy","full","full","free","free"];
-  const C={free:"background:rgba(30,201,138,.1)",busy:"background:rgba(255,214,0,.13);color:var(--Y)",full:"background:rgba(232,25,44,.13);color:var(--R2)",today:"background:var(--R);color:white;font-weight:700",out:"background:rgba(255,214,0,.06);color:var(--txt3)"};
-  let h='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
-  D.forEach(d=>h+=`<div style="font-size:9px;color:var(--txt3);text-align:center;padding:3px;font-weight:700">${d}</div>`);
-  S.forEach((s,i)=>{
-    const d=i-1;
-    if(d<=0){h+="<div></div>";return;}
-    h+=`<div style="font-size:11px;text-align:center;padding:5px 2px;border-radius:4px;cursor:pointer;${C[s]||'color:var(--txt3)'}">${d}</div>`;
+// CALENDAR
+(function() {
+  const el = document.getElementById("cal");
+  if (!el) return;
+  const days = ["L","M","X","J","V","S","D"];
+  const st = ["","","free","free","busy","full","busy","busy","free","free","free","busy","full","full","free","busy","today","out","out","busy","full","free","free","free","busy","busy","full","full","free","free"];
+  const col = {free:"background:rgba(30,201,138,.1)",busy:"background:rgba(255,214,0,.13);color:var(--Y)",full:"background:rgba(232,25,44,.13);color:var(--R2)",today:"background:var(--R);color:white;font-weight:700",out:"background:rgba(255,214,0,.06);color:var(--txt3)"};
+  let h = "<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">";
+  days.forEach(d => h += "<div style="font-size:9px;color:var(--txt3);text-align:center;padding:3px;font-weight:700">" + d + "</div>");
+  st.forEach((s, i) => {
+    const d = i - 1;
+    if (d <= 0) { h += "<div></div>"; return; }
+    h += "<div style="font-size:11px;text-align:center;padding:5px 2px;border-radius:4px;cursor:pointer;" + (col[s] || "color:var(--txt3)") + "">" + d + "</div>";
   });
-  h+="</div>";
-  el.innerHTML=h;
+  h += "</div>";
+  el.innerHTML = h;
 })();
+
+// SOL MODE
+let solOn = false;
+function toggleSol() {
+  solOn = !solOn;
+  document.body.classList.toggle('sol', solOn);
+  document.getElementById('sol-ic').textContent = solOn ? '🌙' : '☀️';
+  document.getElementById('sol-tx').textContent = solOn ? 'Modo Noche' : 'Modo Sol';
+  toast(solOn ? '☀️ Modo Sol — máxima visibilidad bajo el sol' : '🌙 Modo Noche activado');
+}
+
 </script>
 </body>
 </html>
